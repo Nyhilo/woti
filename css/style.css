@@ -1,0 +1,156 @@
+body {
+    background-color: #F7F5EF;
+/*    background-image: url(https://www.wallpaperup.com/uploads/wallpapers/2013/12/11/191759/ae5fb76ec7d4e6e611258b64cb4ed5fb-1000.jpg);
+        min-height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;*/
+    font-family: 'Monofur', Arial, sans-serif;
+
+    margin-top: 20vh;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+header {
+    color: #333;
+    font-size: 2rem;
+    text-align: center;
+}
+
+main {
+}
+
+
+/* Grid Items */
+.grid-container {
+    display: grid;
+    margin: auto;
+    grid-template-columns: auto auto auto ;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+        "wolfram wolfram wolfram"
+        "hello about about";
+    grid-gap: 1vh .5vw;
+
+    /*background-color: #BEBBB6;*/
+    background-color: rgba(0,0,0,0);
+
+    width: 32rem;
+    /*padding: 1vmin;*/
+
+    text-align: center;
+}
+
+.grid-item {
+    /*background-color: #BEBBB6;*/
+    background-color: rgba(0,0,0,0); 
+    border: .2rem double #444;
+    border: .2rem double rgba(0, 0, 0, 0.6);
+    font-size: 2rem;
+    padding: 1rem;
+
+}
+
+.subtitle {
+    font-size: 1rem;
+}
+
+/* Individual items in the grid
+    list of pastel colors
+    #ffd1dc (255,209,220)
+    #ddceff (221,206,255)
+*/
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited, a:active {
+    color: #333;
+}
+
+/*Wolfram Button*/
+.wolfram {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.wolfram:hover {
+    background-color: #bbebff;
+    /*background-color: rgba(187,135,255,.13)*/
+}
+
+/*Hello Game Button*/
+.hello {
+    /*grid-column: 1 / span 2;*/
+}
+
+.hello:hover {
+    background-color: #ccffee;
+}
+
+.hello:active {
+    background-color: #E6FFF7;
+}
+
+/*About Me button*/
+.about {
+    grid-area: about;
+}
+
+.about:hover {
+    background-color: #ffd7cc;
+}
+
+.about:active {
+
+}
+
+/* Misc */
+@font-face {
+    font-family: "Monofur";
+    src: url("../fonts/monof55.ttf");
+}
+
+/*Other Page*/
+
+.return-footer {
+    position: absolute;
+    padding: .2em;
+    bottom: 2em;
+    border: 2px double #333;
+}
+
+.return-footer:hover {
+    background-color: #9D988F;
+}
+
+.return-footer:active {
+    background-color: #8C8578;
+}
+
+.about-body {
+    width: 80vw;
+    margin: auto;
+    padding-top: 2em;
+}
+
+
+.about-header {
+    margin-left, margin-right: 10%; 
+    text-align: left;
+    color: #333;
+    font-size: 2em;
+}
+
+.about-main {
+    margin: auto;
+    width: 70vw;
+    font-size: 1.5em;
+}

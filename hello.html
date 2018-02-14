@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<!-- We're going to try and have some fun with this project,
+    first by doing a little bit of styling to make it look better
+    and second by trying to organize it all in one file in a way
+    that looks nice and uncluttered.
+
+    Jacob Cloward
+    1/22/2018
+-->
+
+<!-- Let's Begin -->
+<html lang="en">
+
+
+<!-- Website Head, contains style and script -->
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- CSS Styles -->
+    <style>
+        /* We want everything in the body to be font-consistent and centered, for aestehetics */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 100%;
+            text-align: center;
+            padding-top: 2em;
+        }
+
+        /* Input box nees to be wide enough to accomidate the placeholder text */
+        input {
+            width: 20em;
+        }
+        button {
+            margin-top: 1em;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            padding: 1em;
+        }
+    </style>
+
+    <link href="css/style.css" rel="stylesheet"/>
+
+    <!-- Javascript scripts -->
+    <script>
+        // I appreciate how HTML, CSS and JavaScript have three different commenting syntaxes in the same document
+
+        // Force the DOM to load our listeners
+        window.onload=function() {
+            // Get the text from the replyBox
+            var input = document.getElementById("replyBox");
+            
+            // Let the box trigger some javascript when we press enter
+            input.addEventListener("keyup", function(event) {
+
+                // W3Schools suggestion to prevent extraneous error handling
+                event.preventDefault();
+
+                // Checks for the enter key being pressed
+                if (event.keyCode === 13) {
+                    reply();
+                }
+            });
+        }
+
+        // Reads the text box and changes the greeting heading depending on what was entered
+        function reply() {
+            // Read the input from the text box
+            replymsg = document.getElementById("replyBox").value;
+            heading = document.getElementById("heading")
+
+            // Our regex matches instances of "hi" and "hello", ignoring case and optionally allowing a . or ! at the end
+            reg = /^(hi|hello)(\!$|\.$|$)/i
+
+            // Find if the input matches our regex
+            if ( reg.test( replymsg ) ) {
+                heading.innerHTML = "Yay! You said hello! Let's be friends.";
+
+            } else {
+                heading.innerHTML = "Please say hi to me :(";
+            }
+        }
+
+    </script>
+
+</head>
+
+<main>
+    <!-- HTML Body -->
+    <body>
+        <h1 id="heading">Hello there!</h1>
+        <input id="replyBox" type="text" placeholder="Type some text then press &quot;Enter&quot;"><br>
+        <button type="button" onclick="reply()">Submit</button>
+    </body>
+
+    <!-- Aaaaaand that's all folks! -->
+    <footer>
+        <a href="index.html">
+            <div class="return-footer" style="width: 6rem;">Return Home</div>
+        </a>
+    </footer>
+</main>
+</html>
