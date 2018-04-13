@@ -1,20 +1,92 @@
 body {
-    margin-top: .5rem;
+    margin: 0;
 }
 
-h3 {
+
+/* Main */
+
+h1 {
+    margin: 1rem;
+}
+
+h2 {
     font-size: 200%;
+    margin: 0;
+    text-align: left;
 }
 
-main.simulation-area, main.options-area {
-    padding: 1em;
+a.textlink {
+    text-decoration: underline ;
+    
+}
+
+#info h2 {
+    font-size: 180%;
+    text-align: center;
+}
+
+main {
+    margin-left: 0px;
+    transition: .5s;
+}
+
+main div.options-area {
+    display: table;
+    width: auto;
 }
 
 main div {
+    position: relative;
     display: box;
     width: auto;
     text-align: center;
     margin: 0 auto;
 }
 
+.btn {
+    margin-bottom: 1rem;
+    border-radius: 2px;
+}
 
+/* Extra Bits */
+
+table, tr, td {
+    border: 1px solid #333332;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+/* Canvas and Rules*/
+
+canvas{
+    margin-bottom: .5rem;
+    border: 1px solid #333332;
+}
+
+.rule-container {
+    display: inline-block;
+    font-size: 4px;
+}
+
+div.inline {
+    display: inline-block;
+    letter-spacing: 0;
+}
+
+div.rule {
+    margin-top: 1px;
+}
+
+.rule-container div {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #333332;
+}
+
+.simulation-area p {
+    margin: 0 0 .5rem;
+}
+
+.rulebtn {
+    padding: 2px 3px 3px;
+}
