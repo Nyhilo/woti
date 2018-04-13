@@ -1,12 +1,6 @@
 body {
     background-color: #F7F5EF;
-/*    background-image: url(https://www.wallpaperup.com/uploads/wallpapers/2013/12/11/191759/ae5fb76ec7d4e6e611258b64cb4ed5fb-1000.jpg);
-        min-height: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    overflow: hidden;*/
+
     font-family: 'Monofur', Arial, sans-serif;
 
     margin-top: 20vh;
@@ -32,8 +26,9 @@ main {
     display: grid;
     margin: auto;
     grid-template-columns: auto auto auto ;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas: 
+        "necro necro necro"
         "wolfram wolfram wolfram"
         "hello about about";
     grid-gap: 1vh .5vw;
@@ -76,41 +71,59 @@ a:link, a:visited, a:active {
 }
 
 /*Wolfram Button*/
-.wolfram {
+a.wolfram {
     grid-column-start: 1;
     grid-column-end: 4;
 }
 
-.wolfram:hover {
-    background-color: #bbebff;
+a.wolfram:hover {
+    background-color: #CCDDFF;
     /*background-color: rgba(187,135,255,.13)*/
 }
 
-/*Hello Game Button*/
-.hello {
+a.wolfram:active {
+    background-color: #E6EEFF;
+}
+
+/* Hello Game Button */
+a.hello {
     /*grid-column: 1 / span 2;*/
 }
 
-.hello:hover {
-    background-color: #ccffee;
+a.hello:hover {
+    background-color: #CCFFFB;
 }
 
-.hello:active {
-    background-color: #E6FFF7;
+a.hello:active {
+    background-color: #E6FFFD;
 }
 
-/*About Me button*/
-.about {
+/* About Me button */
+a.about {
     grid-area: about;
 }
 
-.about:hover {
+a.about:hover {
     background-color: #ffd7cc;
 }
 
-.about:active {
-
+a.about:active {
+    background-color: #FFEBE6;
 }
+
+/* Necromacy button */
+a.necro {
+    grid-area: necro;
+}
+
+a.necro:hover {
+    background-color: #D5FFCC;
+}
+
+a.necro:active {
+    background-color: #EAFFE6;
+}
+
 
 /* Misc */
 @font-face {
