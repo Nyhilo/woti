@@ -29,4 +29,4 @@ window.onload=(function() {
         bones = bones + 1;
         $("bonecount").innerHTML = bones;
     }              
-}0;    
+});    
