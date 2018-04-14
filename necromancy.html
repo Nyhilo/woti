@@ -30,23 +30,43 @@
     
     <!-- Command section, contains varibale modifying buttons. Modified by bottom bar section -->
     <aside id="command_section">
-        
+        <button class="button unit" id="dig-up-bones" onclick="spawnUnit('skeleton')">
+            <p>Dig Up Bones</p><br><br>
+            <p>++bones</p>
+        </button>
+        <button class="button unit" id="attack-travelers" onclick="spawnUnit('skelArmy')">
+            <p>Attack Travelers</p><br>
+            <p>+bones +gold</p>
+        </button>
     </aside>
     
     <!-- Main Section, contains the shovel stuff button -->
     <section id="main">
-        <img class="shovel border-ui" src="graphics/necromancy/shovel1.png" alt="">
+        <button class="button shovel" ><img src="graphics/necromancy/shovel1.png" alt=""></button>
         
     </section>
     
     <!-- Information section, contains game stats, settings, the shop, etc. selected by buttons on the top bar -->
     <aside id="info_section">
-        
+        <section id="stats-section"></section>
     </aside>
     
     <!-- Bottom bar footer, contains purchasable units, also modifies what is in the command section -->
     <footer id="bottombar">
-        
+        <div class="bottom-button-wrapper">
+            <button class="button unit" id="spawn-skeleton" onclick="spawnUnit('skeleton')">
+                <p>Skeleton</p><br>
+                <p>-<span id="skel-bone-cost">0</span> bones<br>-<span id="skel-mana-cost">0</span> mana</p>
+            </button>
+            <p>Amount: <span id="skeleton-amount">0</span></p>
+        </div>
+        <div class="bottom-button-wrapper">
+            <button class="button unit" id="spawn-skelArmy" onclick="spawnUnit('skelArmy')">
+                <p>Skel Army</p><br>
+                <p>-<span id="skelArmy-bone-cost">0</span> bones<br>-<span id="skelArmy-mana-cost">0</span> mana</p>
+            </button>
+            <p>Amount: <span id="skelArmy-amount">0</span></p>
+        </div>
     </footer>
 </body>
 

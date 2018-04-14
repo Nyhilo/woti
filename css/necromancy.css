@@ -18,14 +18,34 @@ body {
 }
 
 .border-ui {
+}
+
+.button {
+    background-color: inherit;
+    cursor: pointer;
+    box-shadow: 0 6px #6B6A68;
     border: 2px solid #333332;
     border-radius: 10px;
+}
+
+.button:hover {
+    /*background-color: #DEDCD8;*/
+}
+
+.button:active {
+    /*background-color: #DEDCD8;*/
+    box-shadow: 0 3px #6B6A68;
+    transform: translateY(3px);
+}
+
+.button:focus {
+    outline:0;
 }
 
 /* Top Bar */
 
 #topbar {
-    height: 138px;
+    height: 118px;
     border-bottom: 2px solid #333332;
     top: 0;
 }
@@ -35,7 +55,23 @@ body {
 }
 
 #topbar p {
-    padding: 5px 0 0 15px;
+    padding: 0 0 0 15px;
+}
+
+
+
+/* Main */
+#main {
+    width: 600px;
+    height: 520px;
+    float: left;
+}
+
+#main button.shovel {
+    border: 2px solid #333332;
+    padding: 12px 12px 8px;
+    display: block;
+    margin: 60px auto 0;
 }
 
 
@@ -43,27 +79,27 @@ body {
 
 #command_section {
     /*width: 338px; /* Width if both asides are equal  */
-    width: 258px;
+    width: 178px;
     height: 520px;
     border-right: 2px solid #333332;
     float: left;
 }
 
+#command_section button.unit {
+    display: block;
 
-/* Main */
-#main {
-    width: 520px;
-    height: 520px;
-    float: left;
+    width: 124px;
+    height: 100px;
+    margin: 15px auto;
 }
 
-#main img.shovel {
-    border: 2px solid #333332;
-    padding: 5px;
-    display: block;
-    margin: 40px auto 0;
- }
+#command_section button.unit:first-of-type {
+    /*margin-left: 15px;*/
+}
 
+#command_section button.unit p {
+    text-align: center;  
+}
 
 
 /* Info Area */
@@ -80,12 +116,34 @@ body {
 /* Bottom Bar */
 
 #bottombar {
-    height: 138px;
     width: 100%;
+    height: 158px;
     border-top: 2px solid #333332;
     position: absolute;
     bottom: 0;
 }
 
+#bottombar div.bottom-button-wrapper {
+    margin: 15px 5px;
+    display: inline-block;
+}
+
+#bottombar div.bottom-button-wrapper p {
+    margin-left: 5px;
+}
+
+#bottombar button.unit {
+    width: 124px;
+    height: 100px;
+    margin-bottom: 6px;
+}
+
+#bottombar div.bottom-button-wrapper:first-of-type {
+    margin-left: 15px;
+}
+
+#bottombar button.unit p {
+    text-align: center;  
+}
 
 /* Misc */
