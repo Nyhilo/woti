@@ -22,11 +22,11 @@
 
     Jacob Cloward 2018
 */
-// function $(id) { document.getElementById(id);}
+function $(id) { document.getElementById(id);}
 
 let bones = 0;
 function dig() {
     bones = bones + 1;
-    document.getElementById("bonecount").innerHTML = bones;
+    $("bonecount").innerHTML = bones;
 }              
    
