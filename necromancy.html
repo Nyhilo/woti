@@ -6,8 +6,9 @@
     <meta charset="utf-8"/>
     <title>Necromancy - An idle clicker about diggin up bones</title>
     <meta name="description" content="Necromancy is a game about digging up bones, summoning skeleton minions, and ruling the world."/>
-
-    <link href="css/style.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/necromancy.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,6 +22,9 @@
 
     <!-- Top Bar Header, contains gameplay information, buttons that modify the info section -->
     <header id="topbar">
+        <p>Bones: <span id="bonecount">0</span></p>
+        <p>Gold: <span id="goldcount">0</span></p>
+        <p>Mana: <span id="manacount">0</span>/<span id="totalmana">0</span> </p>
         
     </header>
     

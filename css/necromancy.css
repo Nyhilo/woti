@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
 /* Global */
 
 body {
@@ -23,11 +30,20 @@ body {
     top: 0;
 }
 
+#topbar * {
+    font-size: 32px;
+}
+
+#topbar p {
+    padding: 5px 0 0 15px;
+}
+
 
 /* Commands Area */
 
 #command_section {
-    width: 338px;
+    /*width: 338px; /* Width if both asides are equal  */
+    width: 258px;
     height: 520px;
     border-right: 2px solid #333332;
     float: left;
@@ -42,8 +58,10 @@ body {
 }
 
 #main img.shovel {
-    border: 4px solid #333332;
-    display: none;
+    border: 2px solid #333332;
+    padding: 5px;
+    display: block;
+    margin: 40px auto 0;
  }
 
 
@@ -51,7 +69,8 @@ body {
 /* Info Area */
 
 #info_section {
-    width: 338px;
+    /*width: 338px; /* Width if both asides are equal */
+    width: 418px;
     height: 520px;
     border-left: 2px solid #333332;
     float: left;
