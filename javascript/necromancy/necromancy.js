@@ -22,7 +22,7 @@
 
     Jacob Cloward 2018
 */
-function $(id) { document.getElementById(id);}
+function $(id) {return document.getElementById(id);}
 
 let bones = 0;
 function dig() {
