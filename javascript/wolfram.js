@@ -5,8 +5,7 @@ Rewriting Wolfram.js for an html canvas, because doing it with fonts is badly no
 
 Jacob CLoward 4/5/18
 */
-
-// window.onload = function() {
+window.onload = function() {
 
   /////////////
  // Globals //
@@ -316,4 +315,4 @@ function main() {
 main();
 
 
-// }    // Closing the DOM loader at the top
+}    // Closing the DOM loader at the top
