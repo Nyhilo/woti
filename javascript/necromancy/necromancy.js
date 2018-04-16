@@ -22,11 +22,20 @@
 
     Jacob Cloward 2018
 */
+
+  //////////////////////
+ // Helper Functions //
+//////////////////////
+
 function $(id) {return document.getElementById(id);}
 
-let bones = 0;
-function dig() {
-    bones = bones + 1;
-    $("bonecount").innerHTML = bones;
-}              
-   
+
+  //////////////////////
+ // Game Initializer //
+//////////////////////
+
+let Game = {} 
+
+Game.Launch = function() {
+    //
+}
