@@ -55,8 +55,8 @@ Game.Launch = function() {
     Game.curr = {
         bones:0,
         gold:0,
-        maxMana:100
-        mana:100,
+        maxmana:100,
+        mana:100
     }
 
     // Incrementals
@@ -72,9 +72,11 @@ Game.Launch = function() {
     //---------------------------------//
     // Template for a unit
     Game.Unit = class {
-        constructor(name, c, b=0, g=0, m=0) {    // Constructor takes all incrementors as 0 by default
+        constructor(name, bonecost, goldcost, manacost, b=0, g=0, m=0) {    // Constructor takes all incrementors as 0 by default
             this.name = name;
-            this.cost = c;
+            this.bonecost = bonecost;
+            this.goldcost = goldcost;
+            this.manacost = manacost;
             this.bpsmod = b;
             this.gpsmod = g;
             this.mpsmod = m;
@@ -85,9 +87,13 @@ Game.Launch = function() {
 
     // Units
     Game.units = {
-        skeletons: new Game.Unit("skeleton", 10, b=.1, g=.1, m=0),
-        skelArmies: new Game.Unit("skelArmy", 100, b=1.0, g=1.0, m=0),
-        skelHorses: new Game.Unit("skelHorse", 250, b=.5, g=0, m=0)    // Skel Horses can't do anything on their own, but make skeletons more efficient
+        skeletons: new Game.Unit(
+            "skeleton", bonecost=10,  goldcost=0, manacost=1, b=.1, g=.1, m=0),
+        skelArmies: new Game.Unit(
+            "skelArmy", bonecost=100, goldcost=0, manacost=15, b=1.0, g=1.0, m=0),
+        // Skel Horses can't do anything on their own, but make skeletons more efficient
+        skelHorses: new Game.Unit(  
+            "skelHorse", bonecost=250, goldcost=0, manacost=50, b=.5, g=0, m=0)    
     }
 
       //----------------------//
@@ -157,31 +163,6 @@ Game.Launch = function() {
                            horsebonus);
     }
 
-      //----------------//
-     // Game Functions //
-    //----------------//
-
-    Game.dig = function() {
-        Game.curr.bones += Game.incr.digSkill;
-        $('bonecount').innerHTML = Game.curr.bones;
-    }
-
-    Game.spawnUnit = function(someUnit) {
-        switch(someUnit) {
-            case "skeleton":
-                $('skeleton-amount').innerHTML = ++Game.units.skeletons.pop;
-                break;
-            case "skelArmy":
-                $('skelArmy-amount').innerHTML = ++Game.units.skelArmies.pop;
-                break;
-            case "skelHorse":
-                $('skelHorse-amount').innerHTML = ++Game.units.skelHorses.pop;
-                break;
-            default:
-                console.error("Tried to spawn a unit that doesn't exist: " + someUnit);
-        }
-    }
-
       //----------------------//
      // Dealing with Cookies //
     //----------------------//
@@ -189,13 +170,87 @@ Game.Launch = function() {
         // Ortiel
     }
 
+
       //---------------//
      // Draw Function //
     //---------------//
     // Not really a draw function, just fills all the DOM fields
     Game.Draw = function() {
+        $('bonecount').innerHTML = floor(Game.curr.bones);
+        $('goldcount').innerHTML = floor(Game.curr.gold);
+        $('manacount').innerHTML = floor(Game.curr.mana);
+        $('maxmana').innerHTML = floor(Game.curr.maxmana);
+
+        $('skel-bone-cost').innerHTML = floor(Game.units.skeletons.bonecost);
+        $('skel-mana-cost').innerHTML = floor(Game.units.skeletons.manacost);
+        $('skeleton-amount').innerHTML = Game.units.skeletons.pop;
+
+        $('skelArmy-bone-cost').innerHTML = floor(Game.units.skelArmies.bonecost);
+        $('skelArmy-mana-cost').innerHTML = floor(Game.units.skelArmies.manacost);
+        $('skelArmy-amount').innerHTML = Game.units.skelArmies.pop;
+
+        $('skelHorse-bone-cost').innerHTML = floor(Game.units.skelHorses.bonecost);
+        $('skelHorse-mana-cost').innerHTML = floor(Game.units.skelHorses.manacost);
+        $('skelHorse-amount').innerHTML = Game.units.skelHorses.pop;
 
     }
+
+
+      //----------------------//
+     // Other Game Functions //
+    //----------------------//
+
+    Game.dig = function() {
+        Game.curr.bones += Game.incr.digSkill;
+        $('bonecount').innerHTML = floor(Game.curr.bones);
+    }
+
+    Game.spawnUnit = function(someUnit) {
+        switch(someUnit) {
+            case "skeleton":
+                if (Game.curr.bones >= Game.units.skeletons.bonecost &&
+                        Game.curr.gold >= Game.units.skeletons.goldcost &&
+                        Game.curr.mana >= Game.units.skeletons.manacost)
+                {
+                    ++Game.units.skeletons.pop;
+                    Game.curr.bones -= Game.units.skeletons.bonecost;
+                    Game.curr.gold -= Game.units.skeletons.goldcost;
+                    Game.curr.mana -= Game.units.skeletons.manacost;
+                    Game.Draw();
+                } else { console.log("Not enough resources for skeleton") }
+                break;
+
+            case "skelArmy":
+                if (Game.curr.bones >= Game.units.skelArmies.bonecost &&
+                        Game.curr.gold >= Game.units.skelArmies.goldcost &&
+                        Game.curr.mana >= Game.units.skelArmies.manacost)
+                {
+                    ++Game.units.skelArmies.pop;
+                    Game.curr.bones -= Game.units.skelArmies.bonecost;
+                    Game.curr.gold -= Game.units.skelArmies.goldcost;
+                    Game.curr.mana -= Game.units.skelArmies.manacost;
+                    Game.Draw();
+                } else { console.log("Not enough resources for skelArmy") }
+                break;
+
+            case "skelHorse":
+                if (Game.curr.bones >= Game.units.skelHorses.bonecost &&
+                        Game.curr.gold >= Game.units.skelHorses.goldcost &&
+                        Game.curr.mana >= Game.units.skelHorses.manacost)
+                {
+                    ++Game.units.skelHorses.pop;
+                    Game.curr.bones -= Game.units.skelHorses.bonecost;
+                    Game.curr.gold -= Game.units.skelHorses.goldcost;
+                    Game.curr.mana -= Game.units.skelHorses.manacost;
+                    Game.Draw();
+                } else { console.log("Not enough resources for skelHorse") }
+                break;
+
+            default:
+                console.error("Tried to spawn a unit that doesn't exist: " + someUnit);
+        }
+    }
+
 
       //------------//
      // Game Logic //
@@ -209,19 +264,23 @@ Game.Launch = function() {
     //--------------------//
     Game.Loop = function() {
         // Do some stuff
+        if (Game.curr.mana < Game.curr.maxmana) { Game.curr.mana += Game.incr.mps/Game.fps; Game.Draw();}
+        
         Game.Logic();
 
-        Game.eventTimer++;
+        // Game.eventTimer++;
+
         setTimeout(Game.Loop, 1000/Game.fps);
     }
 
       //-------------//
      // Initializer //
     //-------------//    
-    Game.init (function() {
+    Game.init = (function() {
         Game.Load();
         Game.Draw();
+        Game.Loop();
     })();
 }
 
-Game.Launch();
+window.onload = function(){ Game.Launch(); }

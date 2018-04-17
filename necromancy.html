@@ -24,17 +24,17 @@
     <header id="topbar">
         <p>Bones: <span id="bonecount">0</span></p>
         <p>Gold: <span id="goldcount">0</span></p>
-        <p>Mana: <span id="manacount">0</span>/<span id="totalmana">0</span> </p>
+        <p>Mana: <span id="manacount">0</span>/<span id="maxmana">0</span> </p>
         
     </header>
     
     <!-- Command section, contains varibale modifying buttons. Modified by bottom bar section -->
     <aside id="command_section">
-        <button class="button unit" id="dig-up-bones" onclick="Game.spawnUnit('skeleton')">
+        <button class="button unit" id="dig-up-bones" onclick="Game.employ('boneDigger')">
             <p>Dig Up Bones</p><br><br>
             <p>++bones</p>
         </button>
-        <button class="button unit" id="attack-travelers" onclick="Game.spawnUnit('skelArmy')">
+        <button class="button unit" id="attack-travelers" onclick="Game.employ('delinquent')">
             <p>Attack Travelers</p><br>
             <p>+bones +gold</p>
         </button>
