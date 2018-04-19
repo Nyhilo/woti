@@ -55,8 +55,8 @@ Game.Launch = function() {
     Game.curr = {
         bones:100,
         gold:0,
-        maxmana:100,
-        mana:100
+        maxmana:1000,
+        mana:1000
     }
 
     // Incrementals
@@ -88,7 +88,7 @@ Game.Launch = function() {
     // Units
     Game.units = {
         skeletons: new Game.Unit(
-            "skeleton", bonecost=10,  goldcost=0, manacost=1, b=.1, g=.1, m=0),
+            "skeleton", bonecost=10,  goldcost=0, manacost=1, b=.1, g=.05, m=0),
         skelArmies: new Game.Unit(
             "skelArmy", bonecost=100, goldcost=0, manacost=15, b=1.0, g=1.0, m=0),
         // Skel Horses can't do anything on their own, but make skeletons more efficient
@@ -160,6 +160,9 @@ Game.Launch = function() {
 
 
     // Job Overriding //
+
+    // No gold made from diggin bones
+    Game.jobs.boneDiggers.tallygps = function() {};
 
     // Overriding these functions to account for horses
     Game.jobs.delinquents.tallybps = function() {
@@ -258,12 +261,6 @@ Game.Launch = function() {
         }
     }
 
-    Game.calculateAllStats = function() {
-        Game.incr.bps =  Game.jobs.boneDiggers.bps + Game.jobs.delinquents.bps;
-        Game.incr.gps =  Game.jobs.boneDiggers.gps + Game.jobs.delinquents.gps;
-        Game.incr.mps =  Game.jobs.boneDiggers.mps + Game.jobs.delinquents.mps + 1;
-    }
-
     Game.findUnitByName = function(someName) {
         switch (someName) {
             case "skeleton":
@@ -357,16 +354,24 @@ Game.Launch = function() {
      // Game Logic //
     //------------//
     Game.Logic = function() {
-        Game.calculateAllStats();
+        Game.incr.bps =  Game.jobs.boneDiggers.bps + Game.jobs.delinquents.bps;
+        Game.incr.gps =  Game.jobs.boneDiggers.gps + Game.jobs.delinquents.gps;
+        Game.incr.mps =  Game.jobs.boneDiggers.mps + Game.jobs.delinquents.mps + 1;
+
+        Game.curr.bones += Game.incr.bps/Game.fps;
+        Game.curr.gold += Game.incr.gps/Game.fps;
+
+        // We have a maximum mana, this handle that.
+        if (Game.curr.mana < Game.curr.maxmana) {       // Increment if under max
+            Game.curr.mana += Game.incr.mps/Game.fps;
+        } else { Game.curr.mana = Game.curr.maxmana; }  // If over max, set to max
+
     }
 
       //--------------------//
      // The Main Game Loop //
     //--------------------//
     Game.Loop = function() {
-        // Do some stuff
-        if (Game.curr.mana < Game.curr.maxmana) { Game.curr.mana += Game.incr.mps/Game.fps; Game.Draw();}
-
         Game.Logic();
         Game.Draw();
 
