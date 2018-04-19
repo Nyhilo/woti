@@ -103,10 +103,11 @@ body {
 
 #info_section {
     /*width: 338px; /* Width if both asides are equal */
-    width: calc(50% - 91px);
-    height: calc(100% - 120px - 160px);
+    width: calc(50% - 91px - 10px);             /* (50% - halfOfCommandArea - thisPadding) */
+    height: calc(100% - 120px - 160px - 10px);  /*  (50% - topBar - footer - thisPadding)  */
     border-left: 2px solid #333332;
     float: left;
+    padding: 5px;
 }
 
 

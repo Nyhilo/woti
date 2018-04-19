@@ -30,7 +30,7 @@
 function $(id) {return document.getElementById(id);}    // ex $('bonecount')
 
 function floor(num) {return Math.floor(num);}           // Rounds down to nearest decimal
-function floor2(num) {return Maith.floor(num*100)/100;} // Rounds down to nearest hundredth's place
+function floor2(num) {return Math.floor(num*100)/100;} // Rounds down to nearest hundredth's place
 
 
   //-------------//
@@ -165,24 +165,24 @@ Game.Launch = function() {
     Game.jobs.delinquents.tallybps = function() {
         let horsebonus;
         if (this.skeletons >= this.skelHorses) {
-            horsebonus = units.skeletons.bpsmod * this.skelHorses;   
+            horsebonus = Game.units.skeletons.bpsmod * this.skelHorses;   
         } else {
-            horsebonus = units.skeletons.bpsmod * this.skeletons;    // The maximum bonus is only the number of skeletons that can ride horses
+            horsebonus = Game.units.skeletons.bpsmod * this.skeletons;    // The maximum bonus is only the number of skeletons that can ride horses
         }
-        return this.bps = ((this.skeletons * units.skeletons.bpsmod) +
-                           (this.skelArmies * units.skelArmies.bpsmod) +
+        return this.bps = ((this.skeletons * Game.units.skeletons.bpsmod) +
+                           (this.skelArmies * Game.units.skelArmies.bpsmod) +
                            horsebonus);
     }
     // Same as above bu for gold collecting
     Game.jobs.delinquents.tallygps = function() {
         let horsebonus;
         if (this.skeletons >= this.skelHorses) {
-            horsebonus = units.skeletons.gpsmod * this.skelHorses;   
+            horsebonus = Game.units.skeletons.gpsmod * this.skelHorses;   
         } else {
-            horsebonus = units.skeletons.gpsmod * this.skeletons;    // The maximum bonus is only the number of skeletons that can ride horses
+            horsebonus = Game.units.skeletons.gpsmod * this.skeletons;    // The maximum bonus is only the number of skeletons that can ride horses
         }
-        return this.gps = ((this.skeletons * units.skeletons.gpsmod) +
-                           (this.skelArmies * units.skelArmies.gpsmod) +
+        return this.gps = ((this.skeletons * Game.units.skeletons.gpsmod) +
+                           (this.skelArmies * Game.units.skelArmies.gpsmod) +
                            horsebonus);
     }
 
@@ -216,6 +216,11 @@ Game.Launch = function() {
         $('skelHorse-bone-cost').innerHTML = floor(Game.units.skelHorses.bonecost);
         $('skelHorse-mana-cost').innerHTML = floor(Game.units.skelHorses.manacost);
         $('skelHorse-amount').innerHTML = Game.units.skelHorses.pop;
+
+        let statsSectionText = "<span style='font-weight: bold;'>Bones/Sec: </span>" + floor2(Game.incr.bps) + "<br>" +
+                                "<span style='font-weight: bold;'>Gold/Sec: </span>" + floor2(Game.incr.gps) + "<br>" +
+                                "<span style='font-weight: bold;'>Mana Recharge: </span>" + floor2(Game.incr.mps) + "<br>";
+        $('stats-section').innerHTML = statsSectionText;
     }
 
 
@@ -272,8 +277,6 @@ Game.Launch = function() {
                 break;
         }
     }
-
-
 
       //--------------------------//
      // Game Construct Functions //
@@ -365,6 +368,7 @@ Game.Launch = function() {
         if (Game.curr.mana < Game.curr.maxmana) { Game.curr.mana += Game.incr.mps/Game.fps; Game.Draw();}
 
         Game.Logic();
+        Game.Draw();
 
         // Game.eventTimer++;
 
