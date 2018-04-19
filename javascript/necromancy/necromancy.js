@@ -53,7 +53,7 @@ Game.Launch = function() {
 
     // Currencies
     Game.curr = {
-        bones:0,
+        bones:100,
         gold:0,
         maxmana:100,
         mana:100
@@ -101,8 +101,9 @@ Game.Launch = function() {
     //----------------------//
     // A template for a job containing many workers
     Game.job = class {
-        constructor() {
+        constructor(name) {
             // Number of each unit current eployed to this job
+            this.name = name;
             this.skeletons = 0;
             this.skelArmies = 0;
             this.skelHorses = 0;
@@ -113,33 +114,55 @@ Game.Launch = function() {
         }
 
         tallybps() {
-            return this.bps = ((this.skeletons * units.skeletons.bpsmod) +
-                               (this.skelArmies * units.skelArmies.bpsmod));
+            return this.bps = ((this.skeletons * Game.units.skeletons.bpsmod) +
+                               (this.skelArmies * Game.units.skelArmies.bpsmod));
         }
         tallygps() {
-            return this.gps = ((this.skeletons * units.skeletons.gpsmod) +
-                               (this.skelArmies * units.skelArmies.gpsmod * 1.2));
+            return this.gps = ((this.skeletons * Game.units.skeletons.gpsmod) +
+                               (this.skelArmies * Game.units.skelArmies.gpsmod * 1.2));
         }
         tallymps() {
-            return this.mps = ((this.skeletons * units.skeletons.mpsmod) +
-                               (this.skelArmies * units.skelArmies.mpsmod));
+            return this.mps = ((this.skeletons * Game.units.skeletons.mpsmod) +
+                               (this.skelArmies * Game.units.skelArmies.mpsmod));
         }
 
         tallyStats() {
-            tallybps();
-            tallygps();
-            tallymps();
+            this.tallybps();
+            this.tallygps();
+            this.tallymps();
+        }
+
+        employ(someUnit) {
+            if (someUnit.employed < someUnit.pop) {
+                someUnit.employed++;
+                switch(someUnit.name) {
+                    case "skeleton":
+                        this.skeletons++;
+                        $(this.name + "-skel-amount").innerHTML = this.skeletons;
+                        break;
+                    case "skelArmy":
+                        this.skelArmies++;
+                        $(this.name + "-skelArmy-amount").innerHTML = this.skelArmies;
+                        break;
+                    case "skelHorse":
+                        this.skelHorses++;
+                        break;
+                }
+            } else { console.log("Noone to employ!"); }
+            this.tallyStats();
         }
     }
 
-
     Game.jobs = {
-        boneDigger: new Game.job(),
-        delinquent: new Game.job()
+        boneDiggers: new Game.job("boneDiggers"),
+        delinquents: new Game.job("delinquents")  // Because only delinquents would attack random people on the street
     }
 
+
+    // Job Overriding //
+
     // Overriding these functions to account for horses
-    Game.jobs.delinquent.tallybps = function() {
+    Game.jobs.delinquents.tallybps = function() {
         let horsebonus;
         if (this.skeletons >= this.skelHorses) {
             horsebonus = units.skeletons.bpsmod * this.skelHorses;   
@@ -150,18 +173,19 @@ Game.Launch = function() {
                            (this.skelArmies * units.skelArmies.bpsmod) +
                            horsebonus);
     }
-
-    Game.jobs.delinquent.tallymps = function() {
+    // Same as above bu for gold collecting
+    Game.jobs.delinquents.tallygps = function() {
         let horsebonus;
         if (this.skeletons >= this.skelHorses) {
-            horsebonus = units.skeletons.mpsmod * this.skelHorses;   
+            horsebonus = units.skeletons.gpsmod * this.skelHorses;   
         } else {
-            horsebonus = units.skeletons.mpsmod * this.skeletons;    // The maximum bonus is only the number of skeletons that can ride horses
+            horsebonus = units.skeletons.gpsmod * this.skeletons;    // The maximum bonus is only the number of skeletons that can ride horses
         }
-        return this.mps = ((this.skeletons * units.skeletons.mpsmod) +
-                           (this.skelArmies * units.skelArmies.mpsmod) +
+        return this.gps = ((this.skeletons * units.skeletons.gpsmod) +
+                           (this.skelArmies * units.skelArmies.gpsmod) +
                            horsebonus);
     }
+
 
       //----------------------//
      // Dealing with Cookies //
@@ -192,13 +216,68 @@ Game.Launch = function() {
         $('skelHorse-bone-cost').innerHTML = floor(Game.units.skelHorses.bonecost);
         $('skelHorse-mana-cost').innerHTML = floor(Game.units.skelHorses.manacost);
         $('skelHorse-amount').innerHTML = Game.units.skelHorses.pop;
-
     }
 
 
-      //----------------------//
-     // Other Game Functions //
-    //----------------------//
+
+      //---------------------//
+     // Misc Game Functions //
+    //---------------------//
+
+    Game.setAllButtonsBlank = function() {
+        $('spawn-skeleton').style.backgroundColor = "inherit";
+        $('spawn-skelArmy').style.backgroundColor = "inherit";
+        $('spawn-skelHorse').style.backgroundColor = "inherit";        
+    }
+
+    Game.selectUnitButton = function(someUnit) {
+        Game.setAllButtonsBlank();
+        switch(someUnit) {
+            case "skeleton":
+                Game.selectedUnit = "skeleton";
+                $('spawn-skeleton').style.backgroundColor = "#DEDCD8";
+                break;
+
+            case "skelArmy":
+                Game.selectedUnit = "skelArmy";
+                $('spawn-skelArmy').style.backgroundColor = "#DEDCD8";
+                break;
+
+            case "skelHorse":
+                Game.selectedUnit = "skelHorse";
+                $('spawn-skelHorse').style.backgroundColor = "#DEDCD8";
+                break;
+
+            default:
+                console.error("Tried to set button that doesn't exist: " + someUnit);
+        }
+    }
+
+    Game.calculateAllStats = function() {
+        Game.incr.bps =  Game.jobs.boneDiggers.bps + Game.jobs.delinquents.bps;
+        Game.incr.gps =  Game.jobs.boneDiggers.gps + Game.jobs.delinquents.gps;
+        Game.incr.mps =  Game.jobs.boneDiggers.mps + Game.jobs.delinquents.mps + 1;
+    }
+
+    Game.findUnitByName = function(someName) {
+        switch (someName) {
+            case "skeleton":
+                return Game.units.skeletons;
+                break;
+            case "skelArmy":
+                return Game.units.skelArmies;
+                break;
+            case "skelHorse":
+                return Game.units.skelHorses;
+                break;
+        }
+    }
+
+
+
+      //--------------------------//
+     // Game Construct Functions //
+    //--------------------------//
 
     Game.dig = function() {
         Game.curr.bones += Game.incr.digSkill;
@@ -208,42 +287,48 @@ Game.Launch = function() {
     Game.spawnUnit = function(someUnit) {
         switch(someUnit) {
             case "skeleton":
-                if (Game.curr.bones >= Game.units.skeletons.bonecost &&
-                        Game.curr.gold >= Game.units.skeletons.goldcost &&
-                        Game.curr.mana >= Game.units.skeletons.manacost)
-                {
-                    ++Game.units.skeletons.pop;
-                    Game.curr.bones -= Game.units.skeletons.bonecost;
-                    Game.curr.gold -= Game.units.skeletons.goldcost;
-                    Game.curr.mana -= Game.units.skeletons.manacost;
-                    Game.Draw();
-                } else { console.log("Not enough resources for skeleton") }
+                if (Game.selectedUnit == "skeleton") {
+                    if (Game.curr.bones >= Game.units.skeletons.bonecost &&
+                            Game.curr.gold >= Game.units.skeletons.goldcost &&
+                            Game.curr.mana >= Game.units.skeletons.manacost)
+                    {
+                        ++Game.units.skeletons.pop;
+                        Game.curr.bones -= Game.units.skeletons.bonecost;
+                        Game.curr.gold -= Game.units.skeletons.goldcost;
+                        Game.curr.mana -= Game.units.skeletons.manacost;
+                        Game.Draw();
+                    } else { console.log("Not enough resources for skeleton") }
+                } else { Game.selectUnitButton("skeleton"); }
                 break;
 
             case "skelArmy":
-                if (Game.curr.bones >= Game.units.skelArmies.bonecost &&
-                        Game.curr.gold >= Game.units.skelArmies.goldcost &&
-                        Game.curr.mana >= Game.units.skelArmies.manacost)
-                {
-                    ++Game.units.skelArmies.pop;
-                    Game.curr.bones -= Game.units.skelArmies.bonecost;
-                    Game.curr.gold -= Game.units.skelArmies.goldcost;
-                    Game.curr.mana -= Game.units.skelArmies.manacost;
-                    Game.Draw();
-                } else { console.log("Not enough resources for skelArmy") }
+                if (Game.selectedUnit == "skelArmy") {
+                    if (Game.curr.bones >= Game.units.skelArmies.bonecost &&
+                            Game.curr.gold >= Game.units.skelArmies.goldcost &&
+                            Game.curr.mana >= Game.units.skelArmies.manacost)
+                    {
+                        ++Game.units.skelArmies.pop;
+                        Game.curr.bones -= Game.units.skelArmies.bonecost;
+                        Game.curr.gold -= Game.units.skelArmies.goldcost;
+                        Game.curr.mana -= Game.units.skelArmies.manacost;
+                        Game.Draw();
+                    } else { console.log("Not enough resources for skelArmy") }
+                } else { Game.selectUnitButton("skelArmy"); }
                 break;
 
             case "skelHorse":
-                if (Game.curr.bones >= Game.units.skelHorses.bonecost &&
-                        Game.curr.gold >= Game.units.skelHorses.goldcost &&
-                        Game.curr.mana >= Game.units.skelHorses.manacost)
-                {
-                    ++Game.units.skelHorses.pop;
-                    Game.curr.bones -= Game.units.skelHorses.bonecost;
-                    Game.curr.gold -= Game.units.skelHorses.goldcost;
-                    Game.curr.mana -= Game.units.skelHorses.manacost;
-                    Game.Draw();
-                } else { console.log("Not enough resources for skelHorse") }
+                if (Game.selectedUnit == "skelHorse") {
+                    if (Game.curr.bones >= Game.units.skelHorses.bonecost &&
+                            Game.curr.gold >= Game.units.skelHorses.goldcost &&
+                            Game.curr.mana >= Game.units.skelHorses.manacost)
+                    {
+                        ++Game.units.skelHorses.pop;
+                        Game.curr.bones -= Game.units.skelHorses.bonecost;
+                        Game.curr.gold -= Game.units.skelHorses.goldcost;
+                        Game.curr.mana -= Game.units.skelHorses.manacost;
+                        Game.Draw();
+                    } else { console.log("Not enough resources for skelHorse") }
+                } else { Game.selectUnitButton("skelHorse"); }   // We're gonna highlight the button before using it to spawn anything.
                 break;
 
             default:
@@ -252,11 +337,24 @@ Game.Launch = function() {
     }
 
 
+    Game.employ = function(someJob) {
+        switch(someJob) {
+            case "boneDiggers":
+                Game.jobs.boneDiggers.employ(Game.findUnitByName(Game.selectedUnit));
+                break;
+            case "delinquents":
+                Game.jobs.delinquents.employ(Game.findUnitByName(Game.selectedUnit));
+                break;
+            default:
+                console.error("Tried to give unit a job that doesn't exist: " + someJob)
+        }
+    }
+
       //------------//
      // Game Logic //
     //------------//
     Game.Logic = function() {
-
+        Game.calculateAllStats();
     }
 
       //--------------------//
@@ -265,7 +363,7 @@ Game.Launch = function() {
     Game.Loop = function() {
         // Do some stuff
         if (Game.curr.mana < Game.curr.maxmana) { Game.curr.mana += Game.incr.mps/Game.fps; Game.Draw();}
-        
+
         Game.Logic();
 
         // Game.eventTimer++;
@@ -280,6 +378,7 @@ Game.Launch = function() {
         Game.Load();
         Game.Draw();
         Game.Loop();
+        Game.selectUnitButton(Game.selectedUnit);
     })();
 }
 

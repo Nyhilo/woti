@@ -30,14 +30,18 @@
     
     <!-- Command section, contains varibale modifying buttons. Modified by bottom bar section -->
     <aside id="command_section">
-        <button class="button unit" id="dig-up-bones" onclick="Game.employ('boneDigger')">
+        <button class="button unit" id="dig-up-bones" onclick="Game.employ('boneDiggers')">
             <p>Dig Up Bones</p><br><br>
             <p>++bones</p>
         </button>
-        <button class="button unit" id="attack-travelers" onclick="Game.employ('delinquent')">
+        <p>Skels: <span id="boneDiggers-skel-amount"></span></p>
+        <p>SkelArmies: <span id="boneDiggers-skelArmy-amount"></span></p>
+        <button class="button unit" id="attack-travelers" onclick="Game.employ('delinquents')">
             <p>Attack Travelers</p><br>
             <p>+bones +gold</p>
         </button>
+        <p>Skels: <span id="delinquent-skel-amount"></span></p>
+        <p>SkelArmies: <span id="delinquent-skelArmy-amount"></span></p>
     </aside>
     
     <!-- Main Section, contains the shovel stuff button -->
