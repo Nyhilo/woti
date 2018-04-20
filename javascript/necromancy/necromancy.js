@@ -210,15 +210,17 @@ Game.Launch = function() {
 
     Game.Load = function() {
         let save = document.cookie;
-        save = save.substr(0, save.length-1);   // Trims off the ] at the end
-        save = save.substr(6);   // Trims off the 'save=[' at the begining
-        let savearr = save.split('|');
-        Game.eventTimer = JSON.parse(savearr[0]);
-        Game.selectedUnit = JSON.parse(savearr[1]);
-        Game.curr = JSON.parse(savearr[2]);
-        Game.incr = JSON.parse(savearr[3]);
-        Game.units = JSON.parse(savearr[4]);
-        Game.jobs = JSON.parse(savearr[5]);
+        if (document.cookie != "") {
+            save = save.substr(0, save.length-1);   // Trims off the ] at the end
+            save = save.substr(6);   // Trims off the 'save=[' at the begining
+            let savearr = save.split('|');
+            Game.eventTimer = JSON.parse(savearr[0]);
+            Game.selectedUnit = JSON.parse(savearr[1]);
+            Game.curr = JSON.parse(savearr[2]);
+            Game.incr = JSON.parse(savearr[3]);
+            Game.units = JSON.parse(savearr[4]);
+            Game.jobs = JSON.parse(savearr[5]);
+        }
     }
 
       //---------------//
