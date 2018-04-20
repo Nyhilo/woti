@@ -193,10 +193,33 @@ Game.Launch = function() {
       //----------------------//
      // Dealing with Cookies //
     //----------------------//
-    Game.Load = function() {
-        // Ortiel
+    Game.Save = function() {
+        let save = "save=[";
+        save += "" + JSON.stringify(Game.eventTimer);
+        save += "|" + JSON.stringify(Game.selectedUnit);
+        save += "|" + JSON.stringify(Game.curr);
+        save += "|" + JSON.stringify(Game.incr);
+        save += "|" + JSON.stringify(Game.units);
+        save += "|" + JSON.stringify(Game.jobs);
+        let now = new Date();
+        now.setFullYear(now.getFullYear()+5)    // Cookie expiry date set for 5 years
+        save += "]; expires="+now.toUTCString();
+        document.cookie = save; //Saved
     }
 
+
+    Game.Load = function() {
+        let save = document.cookie;
+        save = save.substr(0, save.length-1);   // Trims off the ] at the end
+        save = save.substr(6);   // Trims off the 'save=[' at the begining
+        let savearr = save.split('|');
+        Game.eventTimer = JSON.parse(savearr[0]);
+        Game.selectedUnit = JSON.parse(savearr[1]);
+        Game.curr = JSON.parse(savearr[2]);
+        Game.incr = JSON.parse(savearr[3]);
+        Game.units = JSON.parse(savearr[4]);
+        Game.jobs = JSON.parse(savearr[5]);
+    }
 
       //---------------//
      // Draw Function //
@@ -375,8 +398,7 @@ Game.Launch = function() {
         Game.Logic();
         Game.Draw();
 
-        // Game.eventTimer++;
-
+        if (++Game.eventTimer > 1000*60) { Game.Save(); Game.evenTimer = 0; }   // Save the game to a cookie every minute
         setTimeout(Game.Loop, 1000/Game.fps);
     }
 
