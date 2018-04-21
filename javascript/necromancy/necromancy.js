@@ -226,33 +226,27 @@ Game.Launch = function() {
         if (document.cookie != "") {
             save = save.substr(0, save.length-1);   // Trims off the ] at the end
             save = save.substr(6);   // Trims off the 'save=' at the begining
-            console.log(save);
-
             let savearr = save.split('|');
-            console.log(savearr);
 
             Game.eventTimer = parseInt(savearr[0]);
             Game.selectedUnit = savearr[1];
             Game.curr = JSON.parse(savearr[2]);
-            console.log(JSON.parse(savearr[2]));
-            console.log(Game.curr)
-            console.log(Game.curr.bones)
             Game.incr = JSON.parse(savearr[3]);
             Game.units = JSON.parse(savearr[4]);
             Game.jobs.boneDiggers.name = savearr[5];
-            Game.jobs.boneDiggers.skeletons = savearr[6];
-            Game.jobs.boneDiggers.skelArmies = savearr[7];
-            Game.jobs.boneDiggers.skelHorses = savearr[8];
-            Game.jobs.boneDiggers.bps = savearr[9];
-            Game.jobs.boneDiggers.gps = savearr[10];
-            Game.jobs.boneDiggers.mps = savearr[11];
+            Game.jobs.boneDiggers.skeletons = parseInt(savearr[6]);
+            Game.jobs.boneDiggers.skelArmies = parseInt(savearr[7]);
+            Game.jobs.boneDiggers.skelHorses = parseInt(savearr[8]);
+            Game.jobs.boneDiggers.bps = parseFloat(savearr[9]);
+            Game.jobs.boneDiggers.gps = parseFloat(savearr[10]);
+            Game.jobs.boneDiggers.mps = parseFloat(savearr[11]);
             Game.jobs.delinquents.name = savearr[12];
-            Game.jobs.delinquents.skeletons = savearr[13];
-            Game.jobs.delinquents.skelArmies = savearr[14];
-            Game.jobs.delinquents.skelHorses = savearr[15];
-            Game.jobs.delinquents.bps = savearr[16];
-            Game.jobs.delinquents.gps = savearr[17];
-            Game.jobs.delinquents.mps = savearr[18];
+            Game.jobs.delinquents.skeletons = parseInt(savearr[13]);
+            Game.jobs.delinquents.skelArmies = parseInt(savearr[14]);
+            Game.jobs.delinquents.skelHorses = parseInt(savearr[15]);
+            Game.jobs.delinquents.bps = parseFloat(savearr[16]);
+            Game.jobs.delinquents.gps = parseFloat(savearr[17]);
+            Game.jobs.delinquents.mps = parseFloat(savearr[18]);
         }
     }
 
