@@ -333,7 +333,7 @@ Game.Launch = function() {
 
     Game.dig = function() {
         Game.curr.bones += Game.incr.digSkill;
-        $('bonecount').innerHTML = floor(Game.curr.bones);
+
     }
 
     Game.spawnUnit = function(someUnit) {
