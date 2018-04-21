@@ -194,16 +194,29 @@ Game.Launch = function() {
      // Dealing with Cookies //
     //----------------------//
     Game.Save = function() {
-        let save = "save=[";
-        save += "" + JSON.stringify(Game.eventTimer);
-        save += "|" + JSON.stringify(Game.selectedUnit);
+        let save = "save=";
+        save += "" + Game.eventTimer;
+        save += "|" + Game.selectedUnit;
         save += "|" + JSON.stringify(Game.curr);
         save += "|" + JSON.stringify(Game.incr);
         save += "|" + JSON.stringify(Game.units);
-        save += "|" + JSON.stringify(Game.jobs);
+        save += "|" + Game.jobs.boneDiggers.name;
+        save += "|" + Game.jobs.boneDiggers.skeletons;
+        save += "|" + Game.jobs.boneDiggers.skelArmies;
+        save += "|" + Game.jobs.boneDiggers.skelHorses;
+        save += "|" + Game.jobs.boneDiggers.bps;
+        save += "|" + Game.jobs.boneDiggers.gps;
+        save += "|" + Game.jobs.boneDiggers.mps;
+        save += "|" + Game.jobs.delinquents.name;
+        save += "|" + Game.jobs.delinquents.skeletons;
+        save += "|" + Game.jobs.delinquents.skelArmies;
+        save += "|" + Game.jobs.delinquents.skelHorses;
+        save += "|" + Game.jobs.delinquents.bps;
+        save += "|" + Game.jobs.delinquents.gps;
+        save += "|" + Game.jobs.delinquents.mps;
         let now = new Date();
         now.setFullYear(now.getFullYear()+5)    // Cookie expiry date set for 5 years
-        save += "]; expires="+now.toUTCString();
+        save += "; expires="+now.toUTCString();
         document.cookie = save; //Saved
     }
 
@@ -212,14 +225,34 @@ Game.Launch = function() {
         let save = document.cookie;
         if (document.cookie != "") {
             save = save.substr(0, save.length-1);   // Trims off the ] at the end
-            save = save.substr(6);   // Trims off the 'save=[' at the begining
+            save = save.substr(6);   // Trims off the 'save=' at the begining
+            console.log(save);
+
             let savearr = save.split('|');
-            Game.eventTimer = JSON.parse(savearr[0]);
-            Game.selectedUnit = JSON.parse(savearr[1]);
+            console.log(savearr);
+
+            Game.eventTimer = parseInt(savearr[0]);
+            Game.selectedUnit = savearr[1];
             Game.curr = JSON.parse(savearr[2]);
+            console.log(JSON.parse(savearr[2]));
+            console.log(Game.curr)
+            console.log(Game.curr.bones)
             Game.incr = JSON.parse(savearr[3]);
             Game.units = JSON.parse(savearr[4]);
-            Game.jobs = JSON.parse(savearr[5]);
+            Game.jobs.boneDiggers.name = savearr[5];
+            Game.jobs.boneDiggers.skeletons = savearr[6];
+            Game.jobs.boneDiggers.skelArmies = savearr[7];
+            Game.jobs.boneDiggers.skelHorses = savearr[8];
+            Game.jobs.boneDiggers.bps = savearr[9];
+            Game.jobs.boneDiggers.gps = savearr[10];
+            Game.jobs.boneDiggers.mps = savearr[11];
+            Game.jobs.delinquents.name = savearr[12];
+            Game.jobs.delinquents.skeletons = savearr[13];
+            Game.jobs.delinquents.skelArmies = savearr[14];
+            Game.jobs.delinquents.skelHorses = savearr[15];
+            Game.jobs.delinquents.bps = savearr[16];
+            Game.jobs.delinquents.gps = savearr[17];
+            Game.jobs.delinquents.mps = savearr[18];
         }
     }
 
