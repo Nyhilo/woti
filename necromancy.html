@@ -25,28 +25,33 @@
         <p>Mana: <span id="manacount">0</span>/<span id="maxmana">0</span> </p>
 
         <div id="menu-buttons">
-            <button class="button menu-button" id="stats-button">Stats</button>
-            <button class="button menu-button" id="settings-button">Settings</button><br>
-            <button class="button menu-button" id="store-button">Store</button>
-            <button class="button menu-button" id="credits-button">Credits</button>
+            <button class="button menu-button" id="stats-button" onclick="Game.DrawSidebar('stats')">Stats</button>
+            <button class="button menu-button" id="settings-button" onclick="Game.DrawSidebar('settings')">Settings</button><br>
+            <button class="button menu-button" id="store-button" onclick="Game.DrawSidebar('store')">Store</button>
+            <button class="button menu-button" id="credits-button" onclick="Game.DrawSidebar('credits')">Credits</button>
+        </div>
+        <div id="save-button-container">
+            <button class="button save-button" id="save-button" onclick="Game.Save()">Save</button>
         </div>
         
     </header>
     
     <!-- Command section, contains varibale modifying buttons. Modified by bottom bar section -->
     <aside id="command_section">
-        <button class="button unit" id="dig-up-bones" onclick="Game.employ('boneDiggers')">
-            <p>Dig Up Bones</p><br><br>
-            <p>++bones</p>
-        </button>
-        <p>Skels: <span id="boneDiggers-skel-amount"></span></p>
-        <p>SkelArmies: <span id="boneDiggers-skelArmy-amount"></span></p>
-        <button class="button unit" id="attack-travelers" onclick="Game.employ('delinquents')">
-            <p>Attack Travelers</p><br>
-            <p>+bones +gold</p>
-        </button>
-        <p>Skels: <span id="delinquents-skel-amount"></span></p>
-        <p>SkelArmies: <span id="delinquents-skelArmy-amount"></span></p>
+        <section id="command-button-section">
+            <button class="button unit" id="dig-up-bones" onclick="Game.employ('boneDiggers')">
+                <p>Dig Up Bones</p><br><br>
+                <p>++bones</p>
+            </button>
+            <p>Skels: <span id="boneDiggers-skel-amount"></span></p>
+            <p>SkelArmies: <span id="boneDiggers-skelArmy-amount"></span></p>
+            <button class="button unit" id="attack-travelers" onclick="Game.employ('delinquents')">
+                <p>Attack Travelers</p><br>
+                <p>+bones +gold</p>
+            </button>
+            <p>Skels: <span id="delinquents-skel-amount"></span></p>
+            <p>SkelArmies: <span id="delinquents-skelArmy-amount"></span></p>
+        </section>
     </aside>
     
     <!-- Main Section, contains the shovel stuff button -->
@@ -56,8 +61,8 @@
     </section>
     
     <!-- Information section, contains game stats, settings, the shop, etc. selected by buttons on the top bar -->
-    <aside id="info_section">
-        <section id="stats-section"></section>
+    <aside id="sidebar_section">
+        <section id="info-section"></section>
     </aside>
     
     <!-- Bottom bar footer, contains purchasable units, also modifies what is in the command section -->

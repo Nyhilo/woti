@@ -38,6 +38,18 @@ body {
     outline:0;
 }
 
+img.icon {
+    vertical-align: middle;
+    margin-left: 1px;
+    display: inline-block;
+}
+
+div.price {
+    text-shadow: .5px .5px #333332;
+    margin: 3px auto 0;
+    text-align: center;
+}
+
 /* Top Bar */
 
 #topbar {
@@ -69,6 +81,18 @@ body {
     text-align: center;
 }
 
+#topbar #save-button-container {
+    position: fixed;
+    top: 69px;
+    right: 270px;
+}
+
+#topbar #save-button-container button.save-button {
+    width: 60px;
+    height: 28px;
+    font-size: 50%;
+    text-align: center;
+}
 
 /* Main */
 #main {
@@ -84,6 +108,10 @@ body {
     margin: 60px auto 0;
 }
 
+#main h2#shovel-name {
+    margin: 5px;
+    font-size: 140%
+}
 
 /* Commands Area */
 
@@ -93,6 +121,11 @@ body {
     height: calc(100% - 120px - 160px);
     border-right: 2px solid #333332;
     float: left;
+    overflow: scroll;
+}
+
+#command-button-section {
+    margin: 10px;
 }
 
 #command_section button.unit {
@@ -114,15 +147,54 @@ body {
 
 /* Info Area */
 
-#info_section {
+#sidebar_section {
     /*width: 338px; /* Width if both asides are equal */
     width: calc(50% - 91px - 10px);             /* (50% - halfOfCommandArea - thisPadding) */
     height: calc(100% - 120px - 160px - 10px);  /*  (50% - topBar - footer - thisPadding)  */
     border-left: 2px solid #333332;
     float: left;
     padding: 5px;
+    overflow: scroll;
 }
 
+#info-section {
+    margin: 10px;
+}
+
+#info-section h2 {
+    font-size: 180%;
+    text-decoration: underline;
+}
+
+#info-section h3 {
+    text-align: center;
+    font-size: 160%
+}
+
+#info-section h4 {
+    text-align: center;
+    font-size: 100%
+}
+
+button.shop {
+    padding: 5px;
+    width: 142px;
+    margin: 10px;
+}
+
+button.shop img.shovel {
+    display: block;
+    margin: 3px auto 0;
+    vertical-align: center;
+}
+
+button.shop span.subtitle {
+    margin-top: -3px;
+}
+
+button#buy-double-shovel, button#buy-pet-cat {
+    width: 168px;
+}
 
 /* Bottom Bar */
 
@@ -160,7 +232,7 @@ body {
 /* Misc */
 
 @media (max-width: 550px) { 
-    #info_section, #main, #command_section, #bottombar {
+    #sidebar_section, #main, #command_section, #bottombar {
         float:none;
         width:auto;
         height: auto;
@@ -185,6 +257,12 @@ body {
     #topbar #menu-buttons {
         position: relative;
         display: inline-block;
+    }
+
+    #topbar #save-button-container {
+        position: fixed;
+        top: 10px;
+        right: 10px;
     }
 
     #topbar {
@@ -224,7 +302,7 @@ body {
         order: 4;
     }
 
-    #info_section {
+    #sidebar_section {
         -webkit-box-ordinal-group: 5;
         -moz-box-ordinal-group: 5;
         -ms-flex-order: 5;

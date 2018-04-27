@@ -49,7 +49,7 @@ Game.Launch = function() {
     // Variables
     Game.eventTimer = 0;    // For longer-than-one-frame operations
     Game.selectedUnit = "skeleton";
-
+    Game.currentShovel = "Broken Shovel";
 
     // Currencies
     Game.curr = {
@@ -218,6 +218,7 @@ Game.Launch = function() {
         now.setFullYear(now.getFullYear()+5)    // Cookie expiry date set for 5 years
         save += "; expires="+now.toUTCString();
         document.cookie = save; //Saved
+        console.log("Game Saved!");
     }
 
 
@@ -253,6 +254,75 @@ Game.Launch = function() {
       //---------------//
      // Draw Function //
     //---------------//
+
+    // What is displayed in the sidebar depends on the most recent button pushed, stats section by default
+    // Also writing HTML purely with javascript is bad apparently. Doing it anyway >:D
+    Game.DrawSidebar = function(page = "") {
+        var statsSectionText
+        switch (page) {
+            case "store":
+                statsSectionText =  "<h2>Shop</h2>" +
+                                    "<h3>Shovels</h3>" +
+                                    "<button class='button shop' id='buy-repaired-shovel' onclick='Game.purchase(\"repairedShovel\")'>" + 
+                                        "<h4>Repaired Shovel</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/repairedShovel.png' alt='Repaired Shovel'>" +
+                                        "<span class='subtitle'>Better than your broken one!</span><br>" +
+                                        "<div class='price'>-250<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+                                    "<button class='button shop' id='buy-handled-shovel' onclick='Game.purchase(\"handledShovel\")'>" + 
+                                        "<h4>Handy Shovel</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/handledShovel.png' alt='Shovel with Handle'>" +
+                                        "<span class='subtitle'>It's got a good grip!</span>" +   
+                                        "<div class='price'>-530<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
+                                    "<button class='button shop' id='buy-double-shovel' onclick='Game.purchase(\"doubleShovel\")'>" + 
+                                        "<h4>Double Shovel</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/doubleShovel.png' alt='Double Sided Shovel'>" +
+                                        "<span class='subtitle'>Double the Shovel, Double the Fun!</span>" +   
+                                        "<div class='price'>-2,200<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+                                    "<br><br><h3>Items</h3>" +
+                                    "<button class='button shop' id='buy-lab-equipment' onclick='Game.purchase(\"labEquipment\")'>" + 
+                                        "<h4>Lab Equipment</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Lab Equipment'>" +
+                                        "<span class='subtitle'>Vials and beakers, that kind of thing.</span><br>" +
+                                        "<div class='price'>-2,000<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+                                    "<button class='button shop' id='buy-archeology-tools' onclick='Game.purchase(\"archeologyTools\")'>" + 
+                                        "<h4>Archeology Tools</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Archeology Tools'>" +
+                                        "<span class='subtitle'>Be more careful while digging up bones.</span>" +   
+                                        "<div class='price'>-4,600<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
+                                    "<button class='button shop' id='buy-pet-cat' onclick='Game.purchase(\"petCat\")'>" + 
+                                        "<h4>Pet Cat</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Pet Cat Ms. Whiskers'>" +
+                                        "<span class='subtitle'>Her name is Ms. Whiskers and she's very special</span>" +   
+                                        "<div class='price'>-50,000<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+                                    "<br><br><h3>Upgrades</h3>" +
+                                    "<button class='button shop' id='buy-sharper-spears' onclick='Game.purchase(\"sharpSpears\")'>" + 
+                                        "<h4>Sharper Spears</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Sharper Spears'>" +
+                                        "<span class='subtitle'>So your Skeletons can stab better.</span><br>" +
+                                        "<div class='price'>-600<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+                                    "<button class='button shop' id='buy-skeleton-armor' onclick='Game.purchase(\"skeletonArmor\")'>" + 
+                                        "<h4>Skeleton Armor</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Skeleton Armor'>" +
+                                        "<span class='subtitle'>Harder. Better.</span>" +   
+                                        "<div class='price'>-1,200<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
+                                    "<button class='button shop' id='buy-magic-carrots' onclick='Game.purchase(\"magincCarrots\")'>" + 
+                                        "<h4>Magic Carrots</h4>"+
+                                        "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Magic Carrots'>" +
+                                        "<span class='subtitle'>Horses Love 'Em!</span>" +   
+                                        "<div class='price'>-23,000<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>";
+                break;
+
+            default:   // Default is the stats page
+                statsSectionText =  "<h2>Game Stats</h2>" +
+                                    "<span style='font-weight: bold;'>Current Shovel: </span>" + Game.currentShovel + "<br>" +
+                                    "<span style='font-weight: bold;'>Bones/Sec: </span>" + floor2(Game.incr.bps) + "<br>" +
+                                    "<span style='font-weight: bold;'>Gold/Sec: </span>" + floor2(Game.incr.gps) + "<br>" +
+                                    "<span style='font-weight: bold;'>Mana Recharge: </span>" + floor2(Game.incr.mps) + "<br>";
+                break;
+        }
+        $('info-section').innerHTML = statsSectionText;
+    }
+
     // Not really a draw function, just fills all the DOM fields
     Game.Draw = function() {
         $('bonecount').innerHTML = floor(Game.curr.bones);
@@ -271,11 +341,6 @@ Game.Launch = function() {
         $('skelHorse-bone-cost').innerHTML = floor(Game.units.skelHorses.bonecost);
         $('skelHorse-mana-cost').innerHTML = floor(Game.units.skelHorses.manacost);
         $('skelHorse-amount').innerHTML = Game.units.skelHorses.pop;
-
-        let statsSectionText = "<span style='font-weight: bold;'>Bones/Sec: </span>" + floor2(Game.incr.bps) + "<br>" +
-                                "<span style='font-weight: bold;'>Gold/Sec: </span>" + floor2(Game.incr.gps) + "<br>" +
-                                "<span style='font-weight: bold;'>Mana Recharge: </span>" + floor2(Game.incr.mps) + "<br>";
-        $('stats-section').innerHTML = statsSectionText;
     }
 
 
@@ -333,6 +398,9 @@ Game.Launch = function() {
 
     Game.dig = function() {
         Game.curr.bones += Game.incr.digSkill;
+        // After the bps gets high enough, we want to stop live updating the bonecount when digging
+        // Otherwise it actually lags the game!
+        if (Game.bps < 15) { $('bonecount').innerHTML = Game.bones; }
 
     }
 
@@ -400,7 +468,11 @@ Game.Launch = function() {
             default:
                 console.error("Tried to give unit a job that doesn't exist: " + someJob)
         }
+        Game.DrawSidebar();
     }
+
+
+    Game.purchase = function(item) { console.log("Purchase item: " + item); }
 
       //------------//
      // Game Logic //
@@ -427,7 +499,7 @@ Game.Launch = function() {
         Game.Logic();
         Game.Draw();
 
-        if (++Game.eventTimer > 1000*60) { Game.Save(); Game.evenTimer = 0; }   // Save the game to a cookie every minute
+        if (++Game.eventTimer > 1000*60) { Game.Save(); Game.evenTimer = 0; }   // Save the game to a cookie every 10 seconds
         setTimeout(Game.Loop, 1000/Game.fps);
     }
 
@@ -439,6 +511,7 @@ Game.Launch = function() {
         Game.Draw();
         Game.Loop();
         Game.selectUnitButton(Game.selectedUnit);
+        Game.DrawSidebar();
     })();
 }
 
