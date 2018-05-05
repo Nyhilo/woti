@@ -62,9 +62,67 @@ Game.Launch = function() {
     // Incrementals
     Game.incr = {
         bps:0,      // Bones per second
+        bpsmult:1,   // Multiplier for bps
         gps:0,      // Gold per second
+        gpsmult:1,   // Multiplier for gps
         mps:1,      // Mana recharge per second
+        mpsmult:1,   // Multiplier for mps
         digSkill:1  // Modifier for clicking on the shovel
+    }
+
+    // Items, These line up with the categories in the sidebar
+    Game.item = {
+        // Shovels
+        "repairedShovel": {
+            owned:0,
+            price:250,
+            disp:"inline-block",
+            mod: 5
+        },
+        "handledShovel": {
+            owned:0,
+            price:1300,
+            disp:"inline-block",
+            mod: 25
+        },
+        "doubleShovel": {
+            owned:0,
+            price:4000,
+            disp:"inline-block",
+            mod: 64
+        },
+        // Items (as in, actual items)
+        "labEquipment": {
+            owned:0,
+            price:2000,
+            disp:"inline-block"
+        },
+        "archeologyTools": {
+            owned:0,
+            price:4600,
+            disp:"inline-block"
+        },
+        "petCat": {
+            owned:0,
+            price:50000,
+            disp:"inline-block"
+        },
+        // Upgrades
+        "sharpSpears": {
+            owned:0,
+            price:600,
+            disp:"inline-block"
+        },
+        "skeletonArmor": {
+            owned:0,
+            price:1200,
+            disp:"inline-block"
+        },
+        "magicCarrots": {
+            owned:0,
+            price:23000,
+            disp:"inline-block"
+        }
     }
 
       //---------------------------------//
@@ -107,23 +165,27 @@ Game.Launch = function() {
             this.skeletons = 0;
             this.skelArmies = 0;
             this.skelHorses = 0;
+            this.horseMult = 1;
 
             this.bps = 0;
+            this.bpsmult = 1;
             this.gps = 0;
+            this.gpsmult = 1;
             this.mps = 0;
+            this.mpsmult = 1;
         }
 
         tallybps() {
             return this.bps = ((this.skeletons * Game.units.skeletons.bpsmod) +
-                               (this.skelArmies * Game.units.skelArmies.bpsmod));
+                               (this.skelArmies * Game.units.skelArmies.bpsmod)) * this.bpsmult ;
         }
         tallygps() {
             return this.gps = ((this.skeletons * Game.units.skeletons.gpsmod) +
-                               (this.skelArmies * Game.units.skelArmies.gpsmod * 1.2));
+                               (this.skelArmies * Game.units.skelArmies.gpsmod * 1.2)) * this.gpsmult ;
         }
         tallymps() {
             return this.mps = ((this.skeletons * Game.units.skeletons.mpsmod) +
-                               (this.skelArmies * Game.units.skelArmies.mpsmod));
+                               (this.skelArmies * Game.units.skelArmies.mpsmod)) * this.mpsmult ;
         }
 
         tallyStats() {
@@ -174,7 +236,7 @@ Game.Launch = function() {
         }
         return this.bps = ((this.skeletons * Game.units.skeletons.bpsmod) +
                            (this.skelArmies * Game.units.skelArmies.bpsmod) +
-                           horsebonus);
+                           horsebonus) * this.bpsmult;
     }
     // Same as above bu for gold collecting
     Game.jobs.delinquents.tallygps = function() {
@@ -184,10 +246,12 @@ Game.Launch = function() {
         } else {
             horsebonus = Game.units.skeletons.gpsmod * this.skeletons;    // The maximum bonus is only the number of skeletons that can ride horses
         }
+        horsebonus *= this.horseMult;
         return this.gps = ((this.skeletons * Game.units.skeletons.gpsmod) +
                            (this.skelArmies * Game.units.skelArmies.gpsmod) +
                            horsebonus);
     }
+
 
 
       //----------------------//
@@ -263,61 +327,74 @@ Game.Launch = function() {
             case "store":
                 statsSectionText =  "<h2>Shop</h2>" +
                                     "<h3>Shovels</h3>" +
-                                    "<button class='button shop' id='buy-repaired-shovel' onclick='Game.purchase(\"repairedShovel\")'>" + 
+                                    "<button class='button shop' style='display:"+Game.item["repairedShovel"].disp+";' id='buy-repaired-shovel' onclick='Game.purchase(\"repairedShovel\")'>" + 
                                         "<h4>Repaired Shovel</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/repairedShovel.png' alt='Repaired Shovel'>" +
                                         "<span class='subtitle'>Better than your broken one!</span><br>" +
-                                        "<div class='price'>-250<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
-                                    "<button class='button shop' id='buy-handled-shovel' onclick='Game.purchase(\"handledShovel\")'>" + 
+                                        "<div class='price'>-"+ Game.item["repairedShovel"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+
+                                    "<button class='button shop' style='display:"+Game.item["handledShovel"].disp+";' id='buy-handled-shovel' onclick='Game.purchase(\"handledShovel\")'>" + 
                                         "<h4>Handy Shovel</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/handledShovel.png' alt='Shovel with Handle'>" +
                                         "<span class='subtitle'>It's got a good grip!</span>" +   
-                                        "<div class='price'>-530<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
-                                    "<button class='button shop' id='buy-double-shovel' onclick='Game.purchase(\"doubleShovel\")'>" + 
+                                        "<div class='price'>-"+ Game.item["handledShovel"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
+
+                                    "<button class='button shop' style='display:"+Game.item["doubleShovel"].disp+";' id='buy-double-shovel' onclick='Game.purchase(\"doubleShovel\")'>" + 
                                         "<h4>Double Shovel</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/doubleShovel.png' alt='Double Sided Shovel'>" +
                                         "<span class='subtitle'>Double the Shovel, Double the Fun!</span>" +   
-                                        "<div class='price'>-2,200<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+                                        "<div class='price'>-"+ Game.item["doubleShovel"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+
                                     "<br><br><h3>Items</h3>" +
-                                    "<button class='button shop' id='buy-lab-equipment' onclick='Game.purchase(\"labEquipment\")'>" + 
+                                    "<button class='button shop' style='display:"+Game.item["labEquipment"].disp+";' id='buy-lab-equipment' onclick='Game.purchase(\"labEquipment\")'>" + 
                                         "<h4>Lab Equipment</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Lab Equipment'>" +
                                         "<span class='subtitle'>Vials and beakers, that kind of thing.</span><br>" +
-                                        "<div class='price'>-2,000<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
-                                    "<button class='button shop' id='buy-archeology-tools' onclick='Game.purchase(\"archeologyTools\")'>" + 
+                                        "<div class='price'>-"+ Game.item["labEquipment"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+
+                                    "<button class='button shop' style='display:"+Game.item["archeologyTools"].disp+";' id='buy-archeology-tools' onclick='Game.purchase(\"archeologyTools\")'>" + 
                                         "<h4>Archeology Tools</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Archeology Tools'>" +
                                         "<span class='subtitle'>Be more careful while digging up bones.</span>" +   
-                                        "<div class='price'>-4,600<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
-                                    "<button class='button shop' id='buy-pet-cat' onclick='Game.purchase(\"petCat\")'>" + 
+                                        "<div class='price'>-"+ Game.item["archeologyTools"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
+
+                                    "<button class='button shop' style='display:"+Game.item["petCat"].disp+";' id='buy-pet-cat' onclick='Game.purchase(\"petCat\")'>" + 
                                         "<h4>Pet Cat</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Pet Cat Ms. Whiskers'>" +
                                         "<span class='subtitle'>Her name is Ms. Whiskers and she's very special</span>" +   
-                                        "<div class='price'>-50,000<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+                                        "<div class='price'>-"+ Game.item["petCat"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+
                                     "<br><br><h3>Upgrades</h3>" +
-                                    "<button class='button shop' id='buy-sharper-spears' onclick='Game.purchase(\"sharpSpears\")'>" + 
+                                    "<button class='button shop' style='display:"+Game.item["sharpSpears"].disp+";' id='buy-sharper-spears' onclick='Game.purchase(\"sharpSpears\")'>" + 
                                         "<h4>Sharper Spears</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Sharper Spears'>" +
                                         "<span class='subtitle'>So your Skeletons can stab better.</span><br>" +
-                                        "<div class='price'>-600<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
-                                    "<button class='button shop' id='buy-skeleton-armor' onclick='Game.purchase(\"skeletonArmor\")'>" + 
+                                        "<div class='price'>-"+ Game.item["sharpSpears"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +
+
+                                    "<button class='button shop' style='display:"+Game.item["skeletonArmor"].disp+";' id='buy-skeleton-armor' onclick='Game.purchase(\"skeletonArmor\")'>" + 
                                         "<h4>Skeleton Armor</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Skeleton Armor'>" +
                                         "<span class='subtitle'>Harder. Better.</span>" +   
-                                        "<div class='price'>-1,200<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
-                                    "<button class='button shop' id='buy-magic-carrots' onclick='Game.purchase(\"magincCarrots\")'>" + 
+                                        "<div class='price'>-"+ Game.item["skeletonArmor"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>" +                       
+
+                                    "<button class='button shop' style='display:"+Game.item["magicCarrots"].disp+";' id='buy-magic-carrots' onclick='Game.purchase(\"magicCarrots\")'>" + 
                                         "<h4>Magic Carrots</h4>"+
                                         "<img class='shovel' src='graphics/necromancy/coin-icon.png' alt='Magic Carrots'>" +
                                         "<span class='subtitle'>Horses Love 'Em!</span>" +   
-                                        "<div class='price'>-23,000<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>";
+                                        "<div class='price'>-"+ Game.item["magicCarrots"].price +"<img class='icon' src='graphics/necromancy/coin-icon.png' alt='coin' /></div></button>";
                 break;
 
             default:   // Default is the stats page
                 statsSectionText =  "<h2>Game Stats</h2>" +
                                     "<span style='font-weight: bold;'>Current Shovel: </span>" + Game.currentShovel + "<br>" +
+                                    "<span style='font-weight: bold;'>Digging Skill: </span>" + Game.incr.digSkill + "<br>" +
                                     "<span style='font-weight: bold;'>Bones/Sec: </span>" + floor2(Game.incr.bps) + "<br>" +
                                     "<span style='font-weight: bold;'>Gold/Sec: </span>" + floor2(Game.incr.gps) + "<br>" +
-                                    "<span style='font-weight: bold;'>Mana Recharge: </span>" + floor2(Game.incr.mps) + "<br>";
+                                    "<span style='font-weight: bold;'>Mana Recharge: </span>" + floor2(Game.incr.mps) + "<br>" +
+                                    "<span style='font-weight: bold;'>Bones/Sec Multiplier: </span>" + floor2(Game.incr.bpsmult) + "<br>" +
+                                    "<span style='font-weight: bold;'>Gold/Sec Multiplier: </span>" + floor2(Game.incr.gpsmult) + "<br>" +
+                                    "<span style='font-weight: bold;'>Mana Recharge Multiplier: </span>" + floor2(Game.incr.mpsmult) + "<br>";
+                                    ;
                 break;
         }
         $('info-section').innerHTML = statsSectionText;
@@ -379,6 +456,7 @@ Game.Launch = function() {
     }
 
     Game.findUnitByName = function(someName) {
+
         switch (someName) {
             case "skeleton":
                 return Game.units.skeletons;
@@ -472,15 +550,144 @@ Game.Launch = function() {
     }
 
 
-    Game.purchase = function(item) { console.log("Purchase item: " + item); }
+    Game.purchase = function(item) {
+        console.log("Purchase item: " + item);
+
+        switch (item) {
+            case "repairedShovel":
+                if (Game.curr.gold >= Game.item["repairedShovel"].price) {
+                    Game.item["repairedShovel"].owned++;
+                    Game.item["repairedShovel"].disp = "none";
+                    $('buy-repaired-shovel').style.display="none";
+                    Game.curr.gold -= Game.item["repairedShovel"].price;
+                    
+                    Game.incr.digSkill = Game.item["repairedShovel"].mod;
+                    Game.currentShovel = "Repaired Shovel";
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            case "handledShovel":
+                if (Game.curr.gold >= Game.item["handledShovel"].price) {
+                    Game.item["handledShovel"].owned++;
+                    Game.item["handledShovel"].disp = "none";
+                    $('buy-handled-shovel').style.display="none";
+                    Game.curr.gold -= Game.item["handledShovel"].price;
+
+                    Game.incr.digSkill = Game.item["handledShovel"].mod;
+                    Game.currentShovel = "Repaired Shovel";
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            case "doubleShovel":
+                if (Game.curr.gold >= Game.item["doubleShovel"].price) {
+                    Game.item["doubleShovel"].owned++;
+                    Game.item["doubleShovel"].disp = "none";
+                    $('buy-double-shovel').style.display="none";
+                    Game.curr.gold -= Game.item["doubleShovel"].price;
+
+                    Game.incr.digSkill = Game.item["doubleShovel"].mod;
+                    Game.currentShovel = "Repaired Shovel";
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            // Items (as in, actual items)
+            case "labEquipment":
+                if (Game.curr.gold >= Game.item["labEquipment"].price) {
+                    Game.item["labEquipment"].owned++;
+                    Game.item["labEquipment"].disp = "none";
+                    $('buy-lab-equipment').style.display="none";
+                    Game.curr.gold -= Game.item["labEquipment"].price;
+
+                    Game.units.skeletons.manacost *= .8;
+                    Game.units.skelArmies.manacost *= .8;
+                    Game.units.skelHorses.manacost *= .8;
+
+                    Game.curr.maxmana *= 2;
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            case "archeologyTools":
+                if (Game.curr.gold >= Game.item["archeologyTools"].price) {
+                    Game.item["archeologyTools"].owned++;
+                    Game.item["archeologyTools"].disp = "none";
+                    $('buy-archeology-tools').style.display="none";
+                    Game.curr.gold -= Game.item["archeologyTools"].price;
+
+                    Game.units.skeletons.bonecost *= .8;
+                    Game.units.skelArmies.bonecost *= .8;
+                    Game.units.skelHorses.bonecost *= .8;
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            case "petCat":
+                if (Game.curr.gold >= Game.item["petCat"].price) {
+                    Game.item["petCat"].owned++;
+                    Game.item["petCat"].disp = "none";
+                    $('buy-pet-cat').style.display="none";
+                    Game.curr.gold -= Game.item["petCat"].price;
+
+                    Game.curr.maxmana *= 10;
+                    Game.incr.mpsmult += 4;
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            // Upgrades
+            case "sharpSpears":
+                if (Game.curr.gold >= Game.item["sharpSpears"].price) {
+                    Game.item["sharpSpears"].owned++;
+                    Game.item["sharpSpears"].disp = "none";
+                    $('buy-sharper-spears').style.display = "none";
+                    Game.curr.gold -= Game.item["sharpSpears"].price;
+
+                    Game.jobs.delinquents.bpsmult += 2;
+                    Game.jobs.delinquents.gpsmult += 2;
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            case "skeletonArmor":
+                if (Game.curr.gold >= Game.item["skeletonArmor"].price) {
+                    Game.item["skeletonArmor"].owned++;
+                    Game.item["skeletonArmor"].disp = "none";
+                    $('buy-skeleton-armor').style.display = "none";
+                    Game.curr.gold -= Game.item["skeletonArmor"].price;
+
+                    Game.jobs.delinquents.bpsmult += 4;
+                    Game.jobs.delinquents.gpsmult += 4;
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            case "magicCarrots":        
+                if (Game.curr.gold >= Game.item["magicCarrots"].price) {
+                    Game.item["magicCarrots"].owned++;
+                    Game.item["magicCarrots"].disp = "none";
+                    $('buy-magic-carrots').style.display = "none";
+                    Game.curr.gold -= Game.item["magicCarrots"].price;
+
+                    Game.jobs.delinquents.horseMult += 20;
+
+                } else { console.log("Not enough money!"); }
+                break;
+
+            default:
+
+        }
+    }
 
       //------------//
      // Game Logic //
     //------------//
     Game.Logic = function() {
-        Game.incr.bps =  Game.jobs.boneDiggers.bps + Game.jobs.delinquents.bps;
-        Game.incr.gps =  Game.jobs.boneDiggers.gps + Game.jobs.delinquents.gps;
-        Game.incr.mps =  Game.jobs.boneDiggers.mps + Game.jobs.delinquents.mps + 1;
+        Game.incr.bps =  (Game.jobs.boneDiggers.bps + Game.jobs.delinquents.bps) * Game.incr.bpsmult;
+        Game.incr.gps =  (Game.jobs.boneDiggers.gps + Game.jobs.delinquents.gps) * Game.incr.gpsmult;
+        Game.incr.mps =  (Game.jobs.boneDiggers.mps + Game.jobs.delinquents.mps + 1) * Game.incr.mpsmult;
 
         Game.curr.bones += Game.incr.bps/Game.fps;
         Game.curr.gold += Game.incr.gps/Game.fps;
