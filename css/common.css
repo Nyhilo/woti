@@ -29,13 +29,13 @@ header {
     text-align: center;
 }
 
-a:link, a:active {
+/*a:link, a:active {
     color: #e9ecef;
 }
 
 a:visited {
     color: #6c757d;
-}
+}*/
 
 
 /* Misc */
@@ -83,6 +83,7 @@ a:visited {
 
 
 /*Generic Buttons*/
+/*
 .btn {
     background-color: transparent;
     color: #333332;
@@ -103,3 +104,4 @@ a:visited {
     outline: none;
     text-decoration: none;
 }
+*/
