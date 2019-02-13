@@ -1,106 +1,61 @@
-body
-{
-	margin-top: 20vh;	
+body {
+    padding-top: 10%;
 }
 
-/* Grid Items */
-.grid-container {
-    display: grid;
-    margin: auto;
-    grid-template-columns: auto auto auto ;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: 
-        "necro necro necro"
-        "wolfram wolfram wolfram"
-        "hello about about";
-    grid-gap: 1vh .5vw;
-
-    /*background-color: #BEBBB6;*/
-    background-color: rgba(0,0,0,0);
-
-    width: 32rem;
-    /*padding: 1vmin;*/
-
-    text-align: center;
-}
-
-.grid-item {
+a.landing-page-link {
     /*background-color: #BEBBB6;*/
     background-color: rgba(0,0,0,0); 
     border: .2rem double #444;
-    border: .2rem double rgba(248, 249, 250, 0.8);
-    font-size: 2rem;
-    padding: 1rem;
+    /*border: .2rem double rgba(248, 249, 250, 0.8);*/
+    color: #333;
+    /*font-size: 2rem;*/
+    margin: .2rem;
 
-}
-
-.subtitle {
-    font-size: 1rem;
-}
-
-/* Individual items in the grid
-    list of pastel colors
-    #ffd1dc (255,209,220)
-    #ddceff (221,206,255)
-*/
-
-a {
     text-decoration: none;
 }
 
-a:link, a:visited, a:active {
-    color: #e9ecef;
+a.landing-page-link::hover {
+    text-decoration: none;
+    color:#333;  
+}
+
+a.landing-page-link .link-inner {
+    color: inherit;
+    padding: 1rem;
 }
 
 /*Wolfram Button*/
-a.wolfram {
-    grid-column-start: 1;
-    grid-column-end: 4;
-}
-
-a.wolfram:hover {
+a.wolfram-button:hover {
     background-color: rgba(204, 221, 255, .4);
 }
 
-a.wolfram:active {
+a.wolfram-button:active {
     background-color: rgba(230, 238, 255, .4);
 }
 
 /* Hello Game Button */
-a.hello {
-    /*grid-column: 1 / span 2;*/
-}
-
-a.hello:hover {
+a.hello-button:hover {
     background-color: rgba(204, 255, 251, .4);
 }
 
-a.hello:active {
+a.hello-button:active {
     background-color: rgba(230, 255, 253, .4);
 }
 
 /* About Me button */
-a.about {
-    grid-area: about;
-}
-
-a.about:hover {
+a.blog-button:hover {
     background-color: rgba(255, 215, 204, .4);
 }
 
-a.about:active {
+a.blog-button:active {
     background-color: rgba(255, 235, 230, .4);
 }
 
 /* Necromacy button */
-a.necro {
-    grid-area: necro;
-}
-
-a.necro:hover {
+a.necromancy-button:hover {
     background-color: rgba(213, 255, 204, .4);
 }
 
-a.necro:active {
+a.necromancy-button:active {
     background-color: rgba(234, 255, 230, .4);
 }

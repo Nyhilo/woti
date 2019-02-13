@@ -1,50 +1,56 @@
 <!DOCTYPE HTML>
-
 <html lang="en">
-
-<head>
-    <meta charset="utf-8"/>
-    <title>Landing Page - Words on a Website</title>
-    <meta name="description" content="Landing page for Words on a Website, my page where I will put personal projects and blog posts. "/>
-
-    <link rel="stylesheet" href="css/common.css"/>
-    <link rel="stylesheet" href="css/landingpage.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
-
-<body>
-    <header>
-        <h1>Words on a Website</h1>
-    </header>
-    <main>
-        <div class="grid-container">
-
-            <a href="necromancy.html" class="grid-item necro">
-                <div>
-                    Necromancy<br/><span class="subtitle">A Game About Diggin Up Bones </span>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Landing Page - Words on a Website</title>
+        <meta name="description" content="Landing page for Words on a Website, my page where I will put personal projects and blog posts. "/>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/common.css"/>
+        <link rel="stylesheet" href="css/landingpage.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div class="container">
+            <header class="row justify-content-center align-items-center">
+                <h1 class="text-center display-3">Words on a Website</h1>
+            </header>
+            <main class="row no-gutters justify-content-center align-items-center">
+                
+                <div class="col-6">
+                    <a href="necromancy.html" class="landing-page-link d-block text-center necromancy-button">
+                        <div class="link-inner">
+                            <h3>Necromancy</h3>
+                            <span>A Game About Diggin Up Bones </span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-
-            <a href="wolfram.html" class="grid-item wolfram">
-                <div>
-                    Wolfram<br/><span class="subtitle">Rules of Cellular Automation </span>
+                <div class="w-100"></div>
+                <div class="col-6">
+                    <a href="wolfram.html" class="landing-page-link d-block text-center wolfram-button">
+                        <div class="link-inner">
+                            <h3>Wolfram</h3>
+                            <span>Rules of Cellular Automation </span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-
-            <a href="hello.html" class="grid-item hello">
-                <div>
-                    Hello
+                <div class="w-100"></div>
+                <div class="col-2">
+                    <a href="hello.html" class="landing-page-link d-block text-center hello-button">
+                        <div class="link-inner">
+                            <h3>Hello</h3>
+                        </div>
+                    </a>
                 </div>
-            </a>
-    
-            <a href="blog/index.html" class="grid-item about">
-                <div>
-                    Blog
+                
+                <div class="col-4">
+                    <a href="blog/index.html" class="landing-page-link d-block text-center blog-button">
+                        <div class="link-inner">
+                            <h3>Blog</h3>
+                        </div>
+                    </a>
                 </div>
-            </a>
-
+                
+            </main>
         </div>
-    </main>
-</body>
-
+    </body>
 </html>
