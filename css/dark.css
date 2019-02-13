@@ -1,0 +1,25 @@
+@import "bootstrap-slate.min.css";
+
+:root {
+	--text: #f8f9fa;
+}
+
+/** Global **/
+body {
+	font-family: 'Monofur', Arial, sans-serif;
+}
+
+
+/** Landing Page **/
+a.landing-page-link {
+    background-color: rgba(0,0,0,0); 
+    border: .2rem double rgba(248, 249, 250, 0.8);
+    color: var(--text);
+
+    text-decoration: none;
+}
+
+a.landing-page-link::hover {
+	text-decoration: none;
+    color: var(--text);  
+}

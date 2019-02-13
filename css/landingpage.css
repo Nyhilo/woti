@@ -3,12 +3,10 @@ body {
 }
 
 a.landing-page-link {
-    /*background-color: #BEBBB6;*/
     background-color: rgba(0,0,0,0); 
     border: .2rem double #444;
     /*border: .2rem double rgba(248, 249, 250, 0.8);*/
     color: #333;
-    /*font-size: 2rem;*/
     margin: .2rem;
 
     text-decoration: none;

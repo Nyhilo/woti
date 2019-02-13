@@ -3,13 +3,21 @@
     <head>
         <meta charset="utf-8"/>
         <title>Landing Page - Words on a Website</title>
+        
         <meta name="description" content="Landing page for Words on a Website, my page where I will put personal projects and blog posts. "/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css"/>
+
         <link rel="stylesheet" href="css/common.css"/>
         <link rel="stylesheet" href="css/landingpage.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link id="dark-css" rel="stylesheet" href="">
     </head>
     <body>
+        <a href="#" class="theme-switcher">
+            <i class="fas fa-moon"></i>
+        </a>
         <div class="container">
             <header class="row justify-content-center align-items-center">
                 <h1 class="text-center display-3">Words on a Website</h1>
@@ -52,5 +60,9 @@
                 
             </main>
         </div>
+
+        <script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
+        <script type="text/javascript" src="javascript/themeswitcher.js"></script>
     </body>
 </html>

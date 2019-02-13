@@ -11,6 +11,12 @@ Bootstrap 4 grays:
 900 - #212529 - rgba(33, 37, 41, 1)
 */
 
+:root {
+    --text: #333;
+    --background: #F7F5EF;
+    --hover-highlight: rgb(190,190,190,.5);
+}
+
 /* Misc */
 @font-face {
     font-family: "Monofur";
@@ -18,7 +24,33 @@ Bootstrap 4 grays:
 }
 
 body {
-    background-color: #F7F5EF;
+    background-color: var(--background);
     font-family: 'Monofur', Arial, sans-serif;
-    color:#333;
+    color: var(--text);
+}
+
+a.theme-switcher {
+    display: block;
+
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    right: 2rem;
+    top: 2rem;
+    
+    /*border: 2px solid var(--text);*/
+    border-radius: 5px;
+    
+    padding-top: 0.3rem;
+    
+    text-align: center;
+    color: var(--text);
+}
+
+a.theme-switcher:hover {
+    background-color: var(--hover-highlight)
+}
+
+i.fas {
+    color: var(--text);
 }
