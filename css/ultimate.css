@@ -1,0 +1,76 @@
+header {
+	width: 100%;
+}
+
+.outer-grid .row {
+	margin: 0;
+}
+
+.outer-grid {
+	/*outline: 1px solid black;*/
+	height: 900px;
+	width: 900px;
+	padding: 30px;
+}
+
+.outer-cell {
+	/*outline: 1px solid red;*/
+	width: 280px;
+	height: 280px;
+	padding: 10px;
+}
+
+.inner-grid {
+	/*outline: 1px solid green;*/
+	width: 260px;
+	height: 260px;
+	padding: 10px;
+} 
+
+.inner-cell {
+	/*outline: 1px solid blue;*/
+	width: 80px;
+	height: 80px;
+}
+
+/* Outer Cells */
+.outer-cell.cell-top {
+	border-bottom: 4px solid black;
+	padding-bottom: -4px;
+}
+
+.outer-cell.cell-bottom {
+	border-top: 4px solid black;
+	padding-top: -4px;
+}
+
+.outer-cell.cell-left {
+	border-right: 4px solid black;
+	padding-right: -4px;
+}
+
+.outer-cell.cell-right {
+	border-left: 4px solid black;
+	padding-left: -4px;
+}
+
+/* Inner Cells */
+.inner-cell.cell-top {
+	border-bottom: 2px solid black;
+	padding-bottom: -2px;
+}
+
+.inner-cell.cell-bottom {
+	border-top: 2px solid black;
+	padding-top: -2px;
+}
+
+.inner-cell.cell-left {
+	border-right: 2px solid black;
+	padding-right: -2px;
+}
+
+.inner-cell.cell-right {
+	border-left: 2px solid black;
+	padding-left: -2px;
+}

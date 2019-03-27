@@ -15,6 +15,9 @@ Bootstrap 4 grays:
     --text: #333;
     --background: #F7F5EF;
     --hover-highlight: rgb(190,190,190,.5);
+    --button-color: #333332;
+    --button-hover: #ddd;
+    --button-active: #333;
 }
 
 /* Misc */
@@ -53,4 +56,26 @@ a.theme-switcher:hover {
 
 i.fas {
     color: var(--text);
+}
+
+/*Generic Buttons*/
+.btn {
+    background-color: transparent;
+    color: var(--button-color);
+    padding: .5em 1em .5em 1em;
+    border: solid var(--button-color) 2px;
+    margin: .1em;
+}
+
+.btn:hover {
+    background: var(--button-hover);
+}
+
+.btn:active {
+    background: var(--button-active);
+}
+
+.btn:focus {
+    outline: none;
+    text-decoration: none;
 }

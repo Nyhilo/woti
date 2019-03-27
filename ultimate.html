@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+    <title>Ultimate Tic Tac Toe</title>
+    <meta name="descriptiom" content="Tic Tac Toe for Grownups">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+        <link rel="stylesheet" href="css/common.css"/>
+    	<link href="css/navigation.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/ultimate.css">
+        <link id="dark-css" rel="stylesheet" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+	    <!-- The sidebar for the page. Used for navigation to the rest of the website and information about the current page. -->
+    <aside id="info">
+        <!-- Info button -->
+        <button class="btn tabbtn" id="infobtn" type="button" onclick="openInfo()"><img src="graphics/information.png" alt=""></button>
+        <!-- -->
+    </aside>
+
+    <aside id="nav">
+        <button class="btn tabbtn" id="hamburgbtn" type="button" onclick="openHamburg()"><img src="graphics/hamburger.png" alt=""></button>
+        <a href="index.html"><div class="btn sidebarbtn"><h3>Home</h3></div></a>
+        <a href="necromancy.html" ><div class="btn sidebarbtn"><h3>Necromancy</h3></div></a>
+        <a href="hello.html" ><div class="btn sidebarbtn"><h3>Hello Game</h3></div></a>
+        <a href="about.html" ><div class="btn sidebarbtn"><h3>About Me</h3></div></a>
+    </aside>
+
+    <header>
+    	<h2 class="text-center">Ultimate Tic Tac Toe</h2>
+    </header>
+
+    <main class="container">
+    	<div class="outer-grid mx-auto">
+			<div class="row">
+				<div class="outer-cell cell-top cell-left">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="outer-cell cell-top">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="outer-cell cell-top cell-right">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="outer-cell cell-left">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="outer-cell">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="outer-cell cell-right">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="outer-cell cell-bottom cell-left">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="outer-cell cell-bottom">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="outer-cell cell-bottom cell-right">
+					<div class="inner-grid">
+						<div class="row">
+							<div class="inner-cell cell-top cell-left"></div>
+							<div class="inner-cell cell-top"></div>
+							<div class="inner-cell cell-top cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-left"></div>
+							<div class="inner-cell"></div>
+							<div class="inner-cell cell-right"></div>
+						</div>
+						<div class="row">
+							<div class="inner-cell cell-bottom cell-left"></div>
+							<div class="inner-cell cell-bottom"></div>
+							<div class="inner-cell cell-bottom cell-right"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+    	</div>
+    </main>
+
+    <script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="javascript/localtools.js"></script>
+    <script type="text/javascript" src="javascript/themeswitcher.js"></script>
+    <script src="javascript/navigation.js"></script>
+</body>
+</html>
