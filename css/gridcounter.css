@@ -1,0 +1,58 @@
+.count-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.count-row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.counter-button {
+    display: flex;
+    flex-shrink: 1;
+
+    margin: 5px;
+
+    width: 5em;
+    height: 3em;
+
+    /*border: 2px solid var(--gray-200);*/
+    background: var(--gray-300);
+    border-radius: 5px;
+
+    -webkit-box-shadow: 0px 5px 0px 0px var(--gray-500);
+    -moz-box-shadow: 0px 5px 0px 0px var(--gray-500);
+    box-shadow: 0px 5px 0px 0px var(--gray-500);
+
+    text-align: center;
+    vertical-align: center;
+}
+
+.counter-button:active {
+    transform: translateY(3px);
+
+    -webkit-box-shadow: 0px 2px 0px 0px var(--gray-600);
+    -moz-box-shadow: 0px 2px 0px 0px var(--gray-600);
+    box-shadow: 0px 2px 0px 0px var(--gray-600);
+}
+
+.counter-button > .count {
+    margin: auto;
+
+    text-align: center;
+
+    color: var(--gray-800);
+    font-size: 120%;
+    font-weight: 600;
+
+    /* Prevents values from being highlighted on double-click*/
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+}
