@@ -1,7 +1,8 @@
 (function() {
 
 	var $themeLink = $("#dark-css");
-	var themeLocation = "css/dark.css";
+	var themeLocation = $('meta[data-dark-theme]').data("dark-theme");
+    console.log(themeLocation);
 	var $themeButton = $('a.theme-switcher');
 	var themecookie = Tools.getCookie("theme");
 
