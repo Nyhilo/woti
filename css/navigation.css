@@ -1,6 +1,6 @@
 /* Sidebar stuff */
 
-aside {
+aside#info, aside#nav {
     border-right: 1px solid #333332;
     background-color: inherit;
     padding: 0 10px;
@@ -8,6 +8,7 @@ aside {
     height: 100%;
     position: fixed;
     float: left;
+    z-index: 1000;
     
     transition: .5s;
 
@@ -39,6 +40,7 @@ button.tabbtn {
     position: fixed;
     left: 0px;
     border-left: 1px solid #333332;
+    background-color: inherit;
     border-radius: 0px 4px 4px 0px;
     transition: .5s;    
 }
