@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Stupid Powers</title>
+    <meta name="description" content="Stupid Super Power Generator">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="css/common.css"/>
+    <link href="css/navigation.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/stupidpowers.css">
+    <link id="dark-css" rel="stylesheet" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+    <!-- The sidebar for the page. Used for navigation to the rest of the website and information about the current page. -->
+    <aside id="info">
+        <!-- Info button -->
+        <button class="btn tabbtn" id="infobtn" type="button" onclick="openInfo()"><img src="graphics/information.png" alt=""></button>
+        <!-- -->
+    </aside>
+
+    <aside id="nav">
+        <button class="btn tabbtn" id="hamburgbtn" type="button" onclick="openHamburg()"><img src="graphics/hamburger.png" alt=""></button>
+        <a href="index.html"><div class="btn sidebarbtn"><h3>Home</h3></div></a>
+        <a href="necromancy.html" ><div class="btn sidebarbtn"><h3>Necromancy</h3></div></a>
+        <a href="hello.html" ><div class="btn sidebarbtn"><h3>Hello Game</h3></div></a>
+        <a href="about.html" ><div class="btn sidebarbtn"><h3>About Me</h3></div></a>
+    </aside>
+
+    <header>
+        <h2 class="text-center">Stupid Powers</h2>
+    </header>
+    
+    <div class="container my-5">
+        <div class="col text-center">
+            <button id="generate-btn" class="text-center btn">Generate Stupid Power</button>
+        </div>
+        <div class="output col-12 text-center mt-5">
+            <h3 id="power" class="text-center"></h3>
+            <h4 id="ruling" class="text-center"></h4>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="javascript/jquery-3.3.1.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="javascript/localtools.js"></script>
+    <script type="text/javascript" src="javascript/themeswitcher.js"></script>
+    <script src="javascript/navigation.js"></script>
+
+    <script src="javascript/stupidpowers.js"></script>
+
+</body>
