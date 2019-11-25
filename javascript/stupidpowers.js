@@ -209,17 +209,21 @@
         { power: "Stuffing sneezes", ruling: "" },
         { power: "Hallucinogenic tears", ruling: "" },
         { power: "Select a random Superfight attribute card", ruling: "" },
-        { power: "Select a random Cards Against Humanity white card", ruling: "" }
+        { power: "Select a random Cards Against Humanity white card", ruling: "" },
+        { power: "Sentient finger nails", ruling: "" },
+        { power: "Snake Hair", ruling: "" }
     ];
 
     const $gen = $("#generate-btn");
-    const $power = $("#power");
-    const $ruling = $("#ruling");
-
+    const $output = $(".output");
+    
     $gen.click(() => {
-        const chosen = powers.choose();
+        let chosen = powers.choose();
 
-        $power.html(chosen.power)
-        $ruling.html(chosen.ruling)
+        const $power = $('<h3 id="power" class="text-center"></h3>').html(chosen.power);
+        const $ruling = $('<h4 id="ruling" class="text-center"></h4>').html(chosen.ruling);
+        
+        $output.prepend($ruling);
+        $output.prepend($power);
     });
 })();
