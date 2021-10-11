@@ -1,6 +1,6 @@
 (() => {
     Array.prototype.choose = function () {
-        return this[Math.floor((Math.random()*this.length))];
+        return this[Math.floor((Math.random() * this.length))];
     }
 
     const powers = [
@@ -17,7 +17,6 @@
         { power: "Giant pet slug. Must be kept moist.", ruling: "" },
         { power: "Can teleport people in the same room through walls", ruling: "" },
         { power: "Squirrel Person", ruling: "" },
-        { power: "Your eyes can shine like lightbulbs, but you cannot see while using them", ruling: "" },
         { power: "The Clapper. You can clap your hands to turn on/off nearby electronic devices.", ruling: "" },
         { power: "You can absorb anger", ruling: "" },
         { power: "You are forggotten moments after you are out of sight", ruling: "" },
@@ -137,7 +136,7 @@
         { power: "Roll a new power, you have a dog that has that power", ruling: "" },
         { power: "You can roll down car windows", ruling: "" },
         { power: "Speed knitting", ruling: "" },
-        { power: "You are a cat girl, regardless of actual gender", ruling: "" },
+        { power: "You are a cat girl", ruling: "" },
         { power: "You grow feathers instead of body hair", ruling: "" },
         { power: "You can speak to animals, but not people", ruling: "" },
         { power: "You are a bear", ruling: "" },
@@ -208,21 +207,31 @@
         { power: "Flammable things catch fire around you while holding your breath", ruling: "" },
         { power: "Stuffing sneezes", ruling: "" },
         { power: "Hallucinogenic tears", ruling: "" },
-        { power: "Select a random Superfight attribute card", ruling: "" },
         { power: "Select a random Cards Against Humanity white card", ruling: "" },
         { power: "Sentient finger nails", ruling: "" },
-        { power: "Snake Hair", ruling: "" }
+        { power: "Smell the passage of time", ruling: "" },
+        { power: "Pupils take the forms of numbers", ruling: "" },
+        { power: "Tentacle fingers", ruling: "" },
+        { power: "Can turn invisible, while saying the word \"invisible\" repeatedly", ruling: "" },
+        { power: "*Super* powerful farts, activated by lactose intolerance", ruling: "" },
+        { power: "Spiders man", ruling: "" },
+        { power: "Farting cats", ruling: "" },
+        { power: "Spiders, man", ruling: "" },
+        { power: "Can make a piece of paper and pencil appear out of thin air", ruling: "" },
+        { power: "Traction", ruling: "" },
+        { power: "Heinz Sight - Squirt ketchup in your eyes, see the past", ruling: "" },
+        { power: "Tick Hair - Not like your hair *is* ticks, but it attaches to people like a tick", ruling: "" },
     ];
 
     const $gen = $("#generate-btn");
     const $output = $(".output");
-    
+
     $gen.click(() => {
         let chosen = powers.choose();
 
         const $power = $('<h3 id="power" class="text-center"></h3>').html(chosen.power);
         const $ruling = $('<h4 id="ruling" class="text-center mb-3"></h4>').html(chosen.ruling);
-        
+
         $output.prepend($ruling);
         $output.prepend($power);
     });
